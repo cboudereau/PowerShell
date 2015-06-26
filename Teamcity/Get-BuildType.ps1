@@ -4,7 +4,7 @@ function Get-BuildType()
     Param
     (
         [Parameter(Mandatory=$false)]
-        [string] $BuiltType,
+        [string] $BuildType,
         [Parameter(Mandatory=$false)]
         [pscredential] $Credential
     )
@@ -14,16 +14,16 @@ function Get-BuildType()
         $Credential = Get-TeamCityCredential $Credential
         $server = Get-Server
         
-        if($BuiltType -eq "") 
+        if($BuildType -eq "") 
         {
             return Get-FromJson $server $Credential
         }
 
-        return Get-FromJson $server/id:$BuiltType $Credential
+        return Get-FromJson $server/id:$BuildType $Credential
     }
 }
 
-Register-ParameterCompleter -CommandName 'Get-BuildType' -ParameterName 'BuiltType' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'Get-BuildType' -ParameterName 'BuildType' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-Build).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-BuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
 }
