@@ -4,12 +4,13 @@
     Param
     (
         [string] $Uri,
-        $Data
+        $Data,
+        [pscredential] $Credential
     )
 
     Process
     {
         $json = $Data | ConvertTo-Json
-        return Post-String $Uri $json
+        return Post-String -Uri $Uri -Data $json -Credential $Credential
     }
 }

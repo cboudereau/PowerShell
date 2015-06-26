@@ -9,11 +9,19 @@
                 ValueFromPipeline=$true,
                 ValueFromPipelineByPropertyName=$true)
             ]
-        [string] $Uri
+        [string] $Uri,
+
+        [Parameter(
+                Position=1, 
+                Mandatory=$true, 
+                ValueFromPipeline=$true,
+                ValueFromPipelineByPropertyName=$true)
+            ]
+        [pscredential] $Credential
     )
 
     Process
     {
-        return $Uri | Get-String 'application/json' | ConvertFrom-Json
+        return $Uri | Get-String 'application/json' $Credential | ConvertFrom-Json
     }
 }

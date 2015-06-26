@@ -11,7 +11,15 @@
         [string] $Accept,
 
         [Parameter(
-                Position=1, 
+                Position=1,
+                Mandatory=$true, 
+                ValueFromPipeline=$true,
+                ValueFromPipelineByPropertyName=$true)
+            ]
+        [pscredential] $Credential,
+
+                [Parameter(
+                Position=2, 
                 Mandatory=$true, 
                 ValueFromPipeline=$true,
                 ValueFromPipelineByPropertyName=$true)
@@ -23,8 +31,7 @@
     {
         $webClient = New-Object System.Net.WebClient
         $webClient.Headers.add('accept',$Accept)
-        $creds = new-object System.Net.NetworkCredential("restapi","restapi")
-        $webClient.Credentials = $creds
+        $webClient.Credentials = $Credential
         
         return $webClient.DownloadString($uri)
     }
