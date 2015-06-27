@@ -1,4 +1,4 @@
-﻿function Start-Build()
+﻿function Pin-Build()
 {
     [CmdletBinding()]
     Param

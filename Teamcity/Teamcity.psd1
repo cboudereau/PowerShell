@@ -61,12 +61,14 @@ NestedModules = @()
 FunctionsToExport = @(
 'Get-BuildType'
 'Get-FromJson'
-'Get-Server'
 'Get-String'
 'Get-TeamCityCredential'
+'Get-TeamCityUri'
+'Pin-Build'
 'Post-String'
 'Post-ToJson'
 'Set-Server'
+'Start-Build'
 )
 
 # Cmdlets to export from this module

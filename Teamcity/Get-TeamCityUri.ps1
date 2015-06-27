@@ -5,11 +5,11 @@
     (
         [Parameter(
             Position=0, 
-            Mandatory=$true, 
+            Mandatory=$false, 
             ValueFromPipeline=$true,
             ValueFromPipelineByPropertyName=$true)
         ]
-        $RelativePath
+        $RelativePath = ""
     )
 
     
