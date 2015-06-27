@@ -3,21 +3,11 @@
     [CmdletBinding()]
     Param
     (
-        [Parameter(
-                Position=0, 
-                Mandatory=$true, 
-                ValueFromPipeline=$true,
-                ValueFromPipelineByPropertyName=$true)
-            ]
-        [string] $Uri,
+        [Parameter(Position=0, Mandatory=$true)]
+        [pscredential] $Credential,
 
-        [Parameter(
-                Position=1, 
-                Mandatory=$true, 
-                ValueFromPipeline=$true,
-                ValueFromPipelineByPropertyName=$true)
-            ]
-        [pscredential] $Credential
+        [Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string] $Uri
     )
 
     Process

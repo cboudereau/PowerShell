@@ -3,23 +3,23 @@
     [CmdletBinding()]
     Param
     (
-        [Parameter(
-                Position=0, 
-                Mandatory=$true, 
-                ValueFromPipeline=$true,
-                ValueFromPipelineByPropertyName=$true)
-            ]
-        $BuildType
+        [Parameter(Position=0, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        $BuildType,
+
+        [Parameter(Mandatory=$false)]
+        [pscredential] $Credential
+
     )
 
     Process
     {
-        $root = 'http://localhost:7777/httpAuth/app/rest/buildQueue'
+        $uri = "buildQueue" | Get-TeamCityUri
+        $credential = Get-TeamCityCredential $Credential
+        $buildTypeId = $BuildType.id
 
-        $id = $BuildType.id
+        $data = New-Object -TypeName psobject -Property @{buildTypeId = $buildTypeId} | ConvertTo-Json
 
-        $data = "<build><buildType id='$id'/></build>"
-
-        return Post-String -Uri $root -Data $data -ContentType 'application/xml'
+        $data | Post-String 'application/json' $credential $uri
+        Write-Host "Build $buildTypeId was successfully added to queue"
     }
 }

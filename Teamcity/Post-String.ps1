@@ -3,18 +3,17 @@
    [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Position=0, Mandatory=$true)]
         [string] $ContentType,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Position=1, Mandatory=$true)]
+        [pscredential] $Credential,
+
+        [Parameter(Position=2, Mandatory=$true)]
         [string] $Uri,
 
-        [Parameter(Mandatory=$true)]
-        $Data,
-
-        [Parameter(Mandatory=$true)]
-        [pscredential] $Credential
-
+        [Parameter(Position=3, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        $Data
     )
 
     Process
@@ -23,6 +22,6 @@
         $webClient.Headers.add('Content-Type', $ContentType)
         $webclient.Credentials = $Credential
         
-        return $webClient.UploadData($Uri, [system.Text.Encoding]::UTF8.GetBytes($Data))
+        $webClient.UploadData($Uri, [system.Text.Encoding]::UTF8.GetBytes($Data)) | Out-Null
     }
 }

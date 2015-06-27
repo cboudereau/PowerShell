@@ -11,15 +11,15 @@ function Get-BuildType()
 
     Process
     {
-        $Credential = Get-TeamCityCredential $Credential
-        $server = Get-Server
+        $credential = Get-TeamCityCredential $Credential
+        $uri = "buildTypes" | Get-TeamCityUri
         
         if($BuildType -eq "") 
         {
-            return Get-FromJson $server $Credential
+            return Get-FromJson $credential $uri
         }
 
-        return Get-FromJson $server/id:$BuildType $Credential
+        return Get-FromJson $credential $uri/id:$BuildType
     }
 }
 
