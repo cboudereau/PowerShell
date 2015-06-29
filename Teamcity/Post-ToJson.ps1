@@ -3,14 +3,19 @@
     [CmdletBinding()]
     Param
     (
-        [string] $Uri,
+        [Parameter(Position=0, Mandatory=$true)]
+        [pscredential] $Credential,
+
+        [Parameter(Position=1, Mandatory=$true)]
         $Data,
-        [pscredential] $Credential
+
+        [Parameter(Position=2, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string] $Uri
     )
 
     Process
     {
         $json = $Data | ConvertTo-Json
-        return Post-String -Uri $Uri -Data $json -Credential $Credential
+        return $Uri | Post-String 'application/json' $Credential $json
     }
 }

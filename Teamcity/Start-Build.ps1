@@ -13,9 +13,10 @@
         $credential = Get-TeamCityCredential
         $buildTypeId = $BuildType.id
 
-        $data = New-Object -TypeName psobject -Property @{buildTypeId = $buildTypeId} | ConvertTo-Json
+        $data = New-Object -TypeName psobject -Property @{buildTypeId = $buildTypeId}
 
-        $data | Post-String 'application/json' $credential $uri
+        $uri | Post-ToJson $credential $data
+        
         Write-Host "Build $buildTypeId was successfully added to queue"
     }
 }

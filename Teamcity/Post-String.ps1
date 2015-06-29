@@ -10,10 +10,10 @@
         [pscredential] $Credential,
 
         [Parameter(Position=2, Mandatory=$true)]
-        [string] $Uri,
+        $Data,
 
         [Parameter(Position=3, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-        $Data
+        [string] $Uri
     )
 
     Process
