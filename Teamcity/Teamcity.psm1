@@ -1,4 +1,5 @@
-﻿. $psScriptRoot\Get-BuildType.ps1
+﻿. $psScriptRoot\Get-Builds.ps1
+. $psScriptRoot\Get-BuildType.ps1
 . $psScriptRoot\Get-FromJson.ps1
 . $psScriptRoot\Get-String.ps1
 . $psScriptRoot\Get-TeamCityCredential.ps1

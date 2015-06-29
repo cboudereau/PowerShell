@@ -14,7 +14,7 @@ function Get-BuildType()
         $credential = Get-TeamCityCredential $Credential
         $uri = "buildTypes" | Get-TeamCityUri
         
-        if($BuildType -eq "") 
+        if(!$BuildType) 
         {
             return Get-FromJson $credential $uri
         }

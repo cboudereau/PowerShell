@@ -59,6 +59,7 @@ NestedModules = @()
 
 # Functions to export from this module
 FunctionsToExport = @(
+'Get-Builds'
 'Get-BuildType'
 'Get-FromJson'
 'Get-String'

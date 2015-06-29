@@ -5,25 +5,43 @@
     (
         [Parameter(Position=0, Mandatory=$false)]
         [ValidateSet('ALL','SUCCESS','FAILURE','ERROR')]
-        $Status,
+        [string] $Status,
 
-        [Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=1, Mandatory=$false)]
+        [string[]] $Tags,
+        
+        [Parameter(Position=2, Mandatory=$false)]
+        [switch] $Pinned,
+
+        [Parameter(Position=3, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         $BuildType
     )
 
     Process
     {
-        if($Status -and $Status -eq -not 'ALL')
+        $buildTypeId = $BuildType.id
+        $request = "?locator=buildType:(id:$buildTypeId)"
+
+        if($Status -and $Status -ne 'ALL')
         {
-            
-        }
-        else
-        {
-            Write-Host "Choose None or ALL"
+            $request += ",status:$Status"
         }
         
-        $buildTypeId = $BuildType.id
-        $uri = "buildTypes/id:$buildTypeId/builds" | Get-TeamCityUri
+        if($Tags)
+        {
+            $tags = [string]::Join(',',$Tags)
+            $request += ",tags:($tags)"
+
+        }
+        
+        if($Pinned)
+        {
+            $request += ",pinned:$Pinned"
+        }
+
+        $selector = "builds/$request"
+        $uri = $selector | Get-TeamCityUri
+
         $credential = Get-TeamCityCredential
 
         ($uri | Get-FromJson $credential).build

@@ -9,16 +9,29 @@
             ValueFromPipeline=$true,
             ValueFromPipelineByPropertyName=$true)
         ]
-        $RelativePath = ""
+        [string] $RelativePath = "",
+
+        [Parameter(Position=1, Mandatory=$false)]
+        [string[]] $Parameters = @()
     )
 
     
     Process
     {
+        if($Parameters)
+        {
+            $query = "?"
+
+            $Parameters | % { $query += "$_&" }
+            
+            $query = $query.Substring(0, $query.Length -1)
+        }
+        
         if($env:TEAMCITY)
         {
             $root = New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY)
-            $controller = New-Object -TypeName System.Uri -ArgumentList @($root, $RelativePath)
+            $path = "$RelativePath$query"
+            $controller = New-Object -TypeName System.Uri -ArgumentList @($root, $path)
             
             return $controller.AbsoluteUri
         }
