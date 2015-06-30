@@ -24,7 +24,7 @@
 
         if($Delete)
         {
-            Post-String -ContentType 'application/xml' -Credential $credential -Uri $uri -Method PUT -Text "<tags></tags>"
+            Post-String -ContentType 'application/json' -Credential $credential -Uri $uri -Method PUT -Text "{}"
             Write-Host "Build tag $buildTypeId #$number was successfully removed"
         }
         else
