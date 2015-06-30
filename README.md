@@ -24,22 +24,39 @@ Example : Get-BuildType -BuildType Net_Framework | Start-Build
 ## Get-Builds
 Get all builds for a given buildType
 Example : 
+
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS
+  
     Return all successful Net_Framework build
+  
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Tags @('Prod')
+  
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Pinned
 
 ## Pin-Build
 Pin a given build
 Example : 
+  
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status FAILURE -Tags @('Prod','Integ') | Pin-Build
+
 Unpin build
-Example : Get-BuildType -BuildType Net_Framework | Get-Builds -Status FAILURE -Tags @('Prod','Integ') | Pin-Build -Delete
+
+Example : 
+  
+  Get-BuildType -BuildType Net_Framework | Get-Builds -Status FAILURE -Tags @('Prod','Integ') | Pin-Build -Delete
 
 ## Tag-Build
+
 Tag a given build
-Example : (Get-BuildType -BuildType Net_Framework | Get-Builds)[0] | Tag-Build -Tag 'Prod'
+
+  Example : 
+    
+    (Get-BuildType -BuildType Net_Framework | Get-Builds)[0] | Tag-Build -Tag 'Prod'
+  
   This example Tag the last Net_Framework build
+  
   You can add multiple tag by calling cmdlet for each tag
+
 Delete All Tags
+  
   (Get-BuildType -BuildType Net_Framework | Get-Builds)[0] | Tag-Build -Delete
