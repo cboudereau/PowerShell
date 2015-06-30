@@ -9,19 +9,25 @@
         [Parameter(Position=1, Mandatory=$true)]
         [pscredential] $Credential,
 
-        [Parameter(Position=2, Mandatory=$true)]
-        $Data,
+        [Parameter(Position=2, Mandatory=$false)]
+        [string] $Text,
 
-        [Parameter(Position=3, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=3, Mandatory=$false)]
+        [ValidateSet('POST','PUT','DELETE')]
+        [string] $Method = 'POST',
+
+        [Parameter(Position=4, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [string] $Uri
+
     )
 
     Process
     {
         $webClient = New-Object System.Net.WebClient
-        $webClient.Headers.add('Content-Type', $ContentType)
-        $webclient.Credentials = $Credential
         
-        $webClient.UploadData($Uri, [system.Text.Encoding]::UTF8.GetBytes($Data)) | Out-Null
+        $webClient.Headers.add('Content-Type', $ContentType)
+        $webClient.Credentials = $Credential
+
+        $webClient.UploadString($Uri, $Method, $Text) | Out-Null
     }
 }

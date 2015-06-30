@@ -44,6 +44,6 @@
 
         $credential = Get-TeamCityCredential
 
-        ($uri | Get-FromJson $credential).build
+        (Get-FromJson -Credential $credential -Uri $uri).build
     }
 }

@@ -15,8 +15,8 @@
 
         $data = New-Object -TypeName psobject -Property @{buildTypeId = $buildTypeId}
 
-        $uri | Post-ToJson $credential $data
-        
+        Post-ToJson -Credential $credential -Data $data -Uri $uri
+
         Write-Host "Build $buildTypeId was successfully added to queue"
     }
 }

@@ -16,6 +16,7 @@
     Process
     {
         $json = $Data | ConvertTo-Json
-        return $Uri | Post-String 'application/json' $Credential $json
+        
+        return Post-String -ContentType 'application/json' -Credential $Credential -Text $json -Uri $Uri
     }
 }

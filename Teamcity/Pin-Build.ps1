@@ -3,19 +3,37 @@
     [CmdletBinding()]
     Param
     (
-        [Parameter(Position=0, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-        $BuildType
+        [Parameter(Position=0, Mandatory=$false)]
+        [string] $Comment,
+        
+        [Parameter(Position=1, Mandatory=$false)]
+        [switch] $Delete,
+
+        [Parameter(Position=2, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        $Build
     )
 
     Process
     {
-        $uri = "buildQueue" | Get-TeamCityUri
+        $buildId = $Build.id
+
+        $uri = "builds/id:$buildId/pin/" | Get-TeamCityUri
         $credential = Get-TeamCityCredential
-        $buildTypeId = $BuildType.id
 
-        $data = New-Object -TypeName psobject -Property @{buildTypeId = $buildTypeId} | ConvertTo-Json
+        $method = 'PUT'
 
-        $data | Post-String 'application/json' $credential $uri
-        Write-Host "Build $buildTypeId was successfully added to queue"
+        $output = "pinned"
+
+        if($Delete)
+        {
+            $method = 'DELETE'
+            $output = "unpinned"
+        }
+
+        Post-String -ContentType 'text/plain' -Credential $credential -Uri $uri -Method $method
+
+        $buildTypeId = $Build.buildTypeId
+        $number = $Build.number
+        Write-Host "Build $buildTypeId #$number was successfully $output"
     }
 }
