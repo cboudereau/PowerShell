@@ -4,12 +4,9 @@
     Param
     (
         [Parameter(Position=0, Mandatory=$false)]
-        [string] $Comment,
-        
-        [Parameter(Position=1, Mandatory=$false)]
         [switch] $Delete,
 
-        [Parameter(Position=2, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         $Build
     )
 
