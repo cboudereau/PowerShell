@@ -39,7 +39,7 @@ Pin a given build
 Example : 
   
 ```powershell
-  Get-BuildType -BuildType Net_Framework | Get-Builds -Status FAILURE -Tags @('Prod','Integ') | Pin-Build
+  (Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Tags @('Prod'))[0] | Pin-Build
 ```
 
 Unpin build
@@ -47,7 +47,7 @@ Unpin build
 Example : 
   
 ```powershell
-  Get-BuildType -BuildType Net_Framework | Get-Builds -Status FAILURE -Tags @('Prod','Integ') | Pin-Build -Delete
+  (Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Tags @('Prod'))[0] | Pin-Build -Delete
 ```
 
 ## Tag-Build
