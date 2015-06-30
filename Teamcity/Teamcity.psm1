@@ -9,3 +9,4 @@
 . $psScriptRoot\Post-ToJson.ps1
 . $psScriptRoot\Set-Server.ps1
 . $psScriptRoot\Start-Build.ps1
+. $psScriptRoot\Tag-Build.ps1

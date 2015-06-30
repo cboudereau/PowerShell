@@ -70,6 +70,7 @@ FunctionsToExport = @(
 'Post-ToJson'
 'Set-Server'
 'Start-Build'
+'Tag-Build'
 )
 
 # Cmdlets to export from this module
