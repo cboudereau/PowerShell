@@ -13,14 +13,18 @@
         [Parameter(Position=2, Mandatory=$false)]
         [switch] $Pinned,
 
-        [Parameter(Position=3, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=3, Mandatory=$false)]
+        [string] $Number,
+
+        [Parameter(Position=4, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         $BuildType
     )
 
     Process
     {
+        $number = if($Number) { ",number:$Number" } else { "" }
         $buildTypeId = $BuildType.id
-        $request = "?locator=buildType:(id:$buildTypeId)"
+        $request = "?locator=buildType:(id:$buildTypeId)$number"
 
         if($Status -and $Status -ne 'ALL')
         {
