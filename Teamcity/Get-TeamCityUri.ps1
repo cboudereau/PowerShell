@@ -11,7 +11,14 @@
         ]
         [string] $RelativePath = "",
 
-        [Parameter(Position=1, Mandatory=$false)]
+        [Parameter(
+            Position=1, 
+            Mandatory=$false)
+        ]
+        [string] $BasePath = "httpAuth/app/rest/",
+
+
+        [Parameter(Position=2, Mandatory=$false)]
         [string[]] $Parameters = @()
     )
 
@@ -30,8 +37,9 @@
         if($env:TEAMCITY)
         {
             $root = New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY)
+            $rootBasePath = New-Object -TypeName System.Uri -ArgumentList @($root, $BasePath)
             $path = "$RelativePath$query"
-            $controller = New-Object -TypeName System.Uri -ArgumentList @($root, $path)
+            $controller = New-Object -TypeName System.Uri -ArgumentList @($rootBasePath, $path)
             
             return $controller.AbsoluteUri
         }

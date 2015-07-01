@@ -59,6 +59,8 @@ NestedModules = @()
 
 # Functions to export from this module
 FunctionsToExport = @(
+'Download-AllArtifacts'
+'Download-File'
 'Get-Builds'
 'Get-BuildType'
 'Get-FromJson'
