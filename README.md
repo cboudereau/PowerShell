@@ -28,11 +28,17 @@ This example start the build type Net_Framework.
 Get all builds for a given buildType
 Example : 
 ```powershell
+  #Get all Succcessful builds
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS
   
+  #Get All Prod Tagged Successful builds
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Tags @('Prod')
   
+  #Get All pinned Successful builds
   Get-BuildType -BuildType Net_Framework | Get-Builds -Status SUCCESS -Pinned
+  
+  #Get a single build by build number
+  Get-BuildType -BuildType Net_Framework | Get-Builds -Number 23
 ```
 ## Pin-Build
 Pin a given build
