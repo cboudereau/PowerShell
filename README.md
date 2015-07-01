@@ -63,7 +63,7 @@ Tag a given build
   Example : 
     
 ```powershell
-    (Get-BuildType -BuildType Net_Framework | Get-Builds)[0] | Tag-Build -Tag 'Prod'
+ (Get-BuildType -BuildType Net_Framework | Get-Builds)[0] | Tag-Build -Tag 'Prod'
 ```
   
   This example Tag the last Net_Framework build
