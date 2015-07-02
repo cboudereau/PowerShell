@@ -5,6 +5,7 @@
 . $psScriptRoot\Get-FromJson.ps1
 . $psScriptRoot\Get-String.ps1
 . $psScriptRoot\Get-TeamCityCredential.ps1
+. $psScriptRoot\Get-TeamCityProject.ps1
 . $psScriptRoot\Get-TeamCityUri.ps1
 . $psScriptRoot\Pin-Build.ps1
 . $psScriptRoot\Post-String.ps1

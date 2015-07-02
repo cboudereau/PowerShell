@@ -66,6 +66,7 @@ FunctionsToExport = @(
 'Get-FromJson'
 'Get-String'
 'Get-TeamCityCredential'
+'Get-TeamCityProject'
 'Get-TeamCityUri'
 'Pin-Build'
 'Post-String'

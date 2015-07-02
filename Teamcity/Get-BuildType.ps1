@@ -3,9 +3,10 @@ function Get-BuildType()
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory=$false)]
+        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [string] $BuildType,
-        [Parameter(Mandatory=$false)]
+        
+        [Parameter(Position=1, Mandatory=$false)]
         [pscredential] $Credential
     )
 
@@ -14,12 +15,12 @@ function Get-BuildType()
         $credential = Get-TeamCityCredential $Credential
         $uri = "buildTypes" | Get-TeamCityUri
         
-        if(!$BuildType) 
+        if($BuildType) 
         {
-            return (Get-FromJson $credential $uri).buildType
+            return (Get-FromJson $credential $uri)
         }
 
-        return (Get-FromJson $credential $uri/id:$BuildType)
+        return (Get-FromJson $credential $uri/id:$BuildType).buildType
     }
 }
 
