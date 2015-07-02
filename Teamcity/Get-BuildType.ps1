@@ -17,10 +17,10 @@ function Get-BuildType()
         
         if($BuildType) 
         {
-            return (Get-FromJson $credential $uri)
+            return (Get-FromJson $credential $uri/id:$BuildType)
         }
 
-        return (Get-FromJson $credential $uri/id:$BuildType).buildType
+        return (Get-FromJson $credential $uri).buildType
     }
 }
 
