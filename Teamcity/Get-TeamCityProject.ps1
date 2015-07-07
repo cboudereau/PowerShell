@@ -3,36 +3,25 @@ function Get-TeamCityProject()
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory=$false)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Alias('id')]
         [string] $Project,
         
-        [Parameter(Mandatory=$false)]
-        [switch] $BuildType,
-
-        [Parameter(Mandatory=$false)]
         [pscredential] $Credential
     )
 
     Process
     {
-        $credential = Get-TeamCityCredential $Credential
-        $uri = "projects" | Get-TeamCityUri
+        if($Project)
+        {
+            return Get-TeamCityResource -Credential $Credential -RelativePath projects/id:$Project
+        }
         
-        if(!$Project) 
-        {
-            return (Get-FromJson $credential $uri).project
-        }
-
-        if($BuildType)
-        {
-            return (Get-FromJson $credential $uri/id:$Project).buildTypes.buildType
-        }
-
-        return (Get-FromJson $credential $uri/id:$Project)
+        return Get-TeamCityResource -Credential $Credential -RelativePath projects
     }
 }
 
 Register-ParameterCompleter -CommandName 'Get-TeamCityProject' -ParameterName 'Project' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-TeamCityProject) | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-TeamCityProject).project | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name,$_.id )}
 }

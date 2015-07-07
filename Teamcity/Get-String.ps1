@@ -1,6 +1,6 @@
 ﻿function Get-String()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(Position=0, Mandatory=$true)]
@@ -15,6 +15,12 @@
 
     Process
     {
+        if($WhatIfPreference)
+        {
+            Write-Host "download $uri"
+            return
+        }
+
         $webClient = New-Object System.Net.WebClient
         $webClient.Headers.add('accept',$Accept)
         $webClient.Credentials = $Credential

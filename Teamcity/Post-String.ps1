@@ -1,6 +1,6 @@
 ﻿function Post-String()
 {
-   [CmdletBinding()]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Position=0, Mandatory=$true)]
@@ -25,9 +25,10 @@
     {
         $webClient = New-Object System.Net.WebClient
         
+        $webClient.Headers.add('Accept', "application/json")
         $webClient.Headers.add('Content-Type', $ContentType)
         $webClient.Credentials = $Credential
 
-        $webClient.UploadString($Uri, $Method, $Text) | Out-Null
+        return $webClient.UploadString($Uri, $Method, $Text)
     }
 }

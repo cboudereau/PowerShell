@@ -3,28 +3,26 @@
     [CmdletBinding()]
     Param
     (
-        [Parameter(Position=0, Mandatory=$false)]
         [ValidateSet('ALL','SUCCESS','FAILURE','ERROR')]
         [string] $Status,
 
-        [Parameter(Position=1, Mandatory=$false)]
         [string[]] $Tags,
         
-        [Parameter(Position=2, Mandatory=$false)]
         [switch] $Pinned,
 
-        [Parameter(Position=3, Mandatory=$false)]
         [string] $Number,
 
-        [Parameter(Position=4, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-        $BuildType
+        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Alias('id')]
+        [string] $BuildType,
+
+        [pscredential] $Credential
     )
 
     Process
     {
         $number = if($Number) { ",number:$Number" } else { "" }
-        $buildTypeId = $BuildType.id
-        $request = "?locator=buildType:(id:$buildTypeId)$number"
+        $request = "?locator=buildType:(id:$BuildType)$number"
 
         if($Status -and $Status -ne 'ALL')
         {
@@ -46,8 +44,6 @@
         $selector = "builds/$request"
         $uri = $selector | Get-TeamCityUri
 
-        $credential = Get-TeamCityCredential
-
-        (Get-FromJson -Credential $credential -Uri $uri).build
+        (Get-TeamCityResource -Credential $Credential -RelativePath $uri).build
     }
 }
