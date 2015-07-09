@@ -1,6 +1,6 @@
 function Get-BuildType()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(ValueFromPipelineByPropertyName=$true)]

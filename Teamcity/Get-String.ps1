@@ -15,12 +15,6 @@
 
     Process
     {
-        if($WhatIfPreference)
-        {
-            Write-Host "download $uri"
-            return
-        }
-
         $webClient = New-Object System.Net.WebClient
         $webClient.Headers.add('accept',$Accept)
         $webClient.Credentials = $Credential

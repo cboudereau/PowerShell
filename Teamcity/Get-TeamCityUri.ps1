@@ -1,6 +1,6 @@
 ﻿function Get-TeamCityUri()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(

@@ -1,6 +1,6 @@
 ﻿function Start-Build()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -25,10 +25,18 @@
 
     End
     {
-        $started = @()
-        $buildTypes | Sort-Object -Unique | % { 
+        $uniqueBuildTypes = $buildTypes | Sort-Object -Unique
+
+        if($WhatIfPreference)
+        {
+            $waitMessage = if($Wait){ "(await mode)" } else { "(fire and forget mode)" }
+            $uniqueBuildTypes | % { Write-Host "New $_ Build started $waitMessage" }
+            return
+        }
+        
+        $started = $uniqueBuildTypes | % { 
             $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_ }
-            $started += Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop }
+            Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop }
 
         if($Wait)
         {

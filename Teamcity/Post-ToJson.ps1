@@ -1,15 +1,15 @@
 ﻿function Post-ToJson()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$true)]
+        [Parameter(Mandatory=$true)]
         [pscredential] $Credential,
 
-        [Parameter(Position=1, Mandatory=$true)]
+        [Parameter(Mandatory=$true)]
         $Data,
 
-        [Parameter(Position=2, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [string] $Uri
     )
 

@@ -1,31 +1,37 @@
 ﻿function Post-String()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$true)]
+        [Parameter(Mandatory=$true)]
         [string] $ContentType,
 
-        [Parameter(Position=1, Mandatory=$true)]
+        [Parameter(Mandatory=$true)]
         [pscredential] $Credential,
 
-        [Parameter(Position=2, Mandatory=$false)]
         [string] $Text,
 
-        [Parameter(Position=3, Mandatory=$false)]
         [ValidateSet('POST','PUT','DELETE')]
         [string] $Method = 'POST',
 
-        [Parameter(Position=4, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string] $Accept,
+
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [string] $Uri
 
     )
 
     Process
     {
+        if($WhatIfPreference)
+        {
+            Write-Host "$Method $Text to $Uri"
+            return
+        }
+
         $webClient = New-Object System.Net.WebClient
         
-        $webClient.Headers.add('Accept', "application/json")
+        $webClient.Headers.add('Accept', $(if($Accept){ $Accept } else { $ContentType }))
         $webClient.Headers.add('Content-Type', $ContentType)
         $webClient.Credentials = $Credential
 

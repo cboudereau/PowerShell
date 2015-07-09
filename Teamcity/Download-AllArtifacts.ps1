@@ -1,6 +1,6 @@
 ﻿function Download-AllArtifacts()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(Position=0, Mandatory=$false)]

@@ -1,20 +1,21 @@
 ﻿function Pin-Build()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$false)]
         [switch] $Delete,
 
-        [Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         $Build
     )
 
     Process
     {
-        $buildId = $Build.id
+        $id = $Build.id
+        $buildTypeId = $Build.buildTypeId
+        $number = $Build.number
 
-        $uri = "builds/id:$buildId/pin/" | Get-TeamCityUri
+        $uri = "builds/id:$id/pin/" | Get-TeamCityUri
         $credential = Get-TeamCityCredential
 
         $method = 'PUT'
@@ -27,10 +28,10 @@
             $output = "unpinned"
         }
 
-        Post-String -ContentType 'text/plain' -Credential $credential -Uri $uri -Method $method
+        Post-String -ContentType 'text/plain' -Credential $credential -Uri $uri -Method $method | Out-Null
 
-        $buildTypeId = $Build.buildTypeId
-        $number = $Build.number
         Write-Host "Build $buildTypeId #$number was successfully $output"
+
+        return $Build
     }
 }

@@ -1,6 +1,6 @@
 ﻿function Download-File()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
         [Parameter(Position=0, Mandatory=$true)]
