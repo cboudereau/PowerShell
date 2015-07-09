@@ -6,7 +6,9 @@
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
         [Alias('buildTypeId', 'id')]
         [string] $BuildType,
+        
         [switch] $Wait,
+        
         [pscredential] $Credential
     )
 
@@ -36,7 +38,8 @@
         
         $started = $uniqueBuildTypes | % { 
             $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_ }
-            Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop }
+            Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop
+            Write-Host "$_ was successfully added to the queue" }
 
         if($Wait)
         {

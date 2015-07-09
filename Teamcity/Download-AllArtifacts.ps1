@@ -3,10 +3,10 @@
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$false)]
+        [Parameter(Mandatory=$false)]
         [string] $Directory = 'download',
 
-        [Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         $Build
     )
 

@@ -3,22 +3,11 @@
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(
-            Position=0, 
-            Mandatory=$false, 
-            ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true)
-        ]
+        [Parameter(ValueFromPipeline=$true)]
         [string] $RelativePath = "",
 
-        [Parameter(
-            Position=1, 
-            Mandatory=$false)
-        ]
         [string] $BasePath = "httpAuth/app/rest/",
 
-
-        [Parameter(Position=2, Mandatory=$false)]
         [string[]] $Parameters = @()
     )
 
