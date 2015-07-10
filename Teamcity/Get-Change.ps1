@@ -18,12 +18,12 @@
         
         $uri = "changes/"
 
-        $parameters = @()
-
         if($BuildType)
         {
-            $parameters += "build=$Id"
-            (Get-TeamCityResource -Credential $Credential -RelativePath $uri -Parameters $parameters).change | Get-Change
+            $parameters = @("build=$Id")
+            $changes = (Get-TeamCityResource -Credential $Credential -RelativePath $uri -Parameters $parameters)
+            if($changes.change){ $changes.change | Get-Change }
+            else { @() }
         }
 
         else

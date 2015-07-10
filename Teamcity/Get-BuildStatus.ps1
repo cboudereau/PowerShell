@@ -13,6 +13,7 @@
     {
         $builds = @()
         $parentId = 0
+        $anyRunning = $true
     }
 
     Process
@@ -28,26 +29,29 @@
             return
         }
 
-        while($percent -lt 100) 
+
+
+        while($anyRunning) 
         {
             $states = $builds | % { 
                 $queuedBuild = $_ | Get-TeamCityResource -Credential $Credential
                 $state = $queuedBuild.state
-                $percentComplete = if($state -eq 'finished'){ 100 } elseif($queuedBuild.percentageComplete){ $queuedBuild.percentageComplete } else { 0 }
+                $isFinished = $queuedBuild.state -eq 'finished'
+                $percentComplete = if($isFinished){ 100 } elseif($queuedBuild.percentageComplete){ $queuedBuild.percentageComplete } else { 0 }
                 $statusText = if($queuedBuild.statusText) { $queuedBuild.statusText } else { "work in progress" }
-                return [pscustomobject]@{ build = $queuedBuild; complete = $percentComplete; statusText = $statusText; state = $state } }
+                return [pscustomobject]@{ build = $queuedBuild; complete = $percentComplete; statusText = $statusText; state = $state; isFinished = $isFinished } }
 
             $states | % { Write-Progress -PercentComplete $_.complete -Activity $_.build.buildTypeId -Id $_.build.id -CurrentOperation $_.statusText -Status $_.build.state }
 
-            $percent = ($states | % { $_.complete } | Measure-Object -Average).Average
+            $anyRunning = $($states | Where-Object { !$_.isFinished })
 
-            if($percent -eq 100)
+            if(!$anyRunning)
             {
                 $states | % { 
                     $changeTexts = $_.build | Get-Change | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
                     $changes = $changeTexts -join  "`r`n"
                     
-                    Write-Host "Build $($_.build.buildTypeId) is $($_.state) with status '$($_.statusText)' `r`n$($changes)" }
+                    Write-Host "Build $($_.build.buildTypeId) is $($_.state) with $($_.statusText) status `r`n$($changes)" }
             }
 
             else

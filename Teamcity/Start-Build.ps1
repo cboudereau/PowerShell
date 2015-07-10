@@ -9,6 +9,8 @@
         
         [switch] $Wait,
         
+        [switch] $IsPiped,
+
         [pscredential] $Credential
     )
 
@@ -46,6 +48,9 @@
             $started | Get-BuildStatus | Out-Null
         }
 
-        return $started
+        if($IsPiped)
+        {
+            return $started
+        }
     }
 }
