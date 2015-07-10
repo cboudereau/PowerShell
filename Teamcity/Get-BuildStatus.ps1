@@ -44,5 +44,13 @@
 
             Start-Sleep -Seconds 1
         }
+
+        $builds | % {
+            $build = Get-TeamCityResource -Credential $Credential -Href $_
+            $changes = Get-TeamCityResource -Credential $Credential -Href $($build.changes.href)
+            
+            $changeText = if($changes) { " and changes : $changes" } else { "" }
+            
+            Write-Host "$($build.buildTypeId) was $($build.state) with status '$($build.statusText)'$changeText" }
     }
 }
