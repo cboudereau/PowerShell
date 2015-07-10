@@ -12,6 +12,6 @@
 
     Process
     {
-        return $Uri | Get-String 'application/json' $Credential | ConvertFrom-Json
+        return Get-String -Accept 'application/json' -Credential $Credential -Uri $Uri | ConvertFrom-Json
     }
 }

@@ -1,4 +1,7 @@
-﻿. $psScriptRoot\Download-AllArtifacts.ps1
+﻿. $psScriptRoot\Create-BuildType.ps1
+. $psScriptRoot\Create-TeamCityProject.ps1
+. $psScriptRoot\Delete-TeamCityProject.ps1
+. $psScriptRoot\Download-AllArtifacts.ps1
 . $psScriptRoot\Download-File.ps1
 . $psScriptRoot\Get-Build.ps1
 . $psScriptRoot\Get-BuildStatus.ps1
@@ -10,6 +13,7 @@
 . $psScriptRoot\Get-TeamCityProject.ps1
 . $psScriptRoot\Get-TeamCityResource.ps1
 . $psScriptRoot\Get-TeamCityUri.ps1
+. $psScriptRoot\Get-Template.ps1
 . $psScriptRoot\Pin-Build.ps1
 . $psScriptRoot\Post-String.ps1
 . $psScriptRoot\Post-ToJson.ps1

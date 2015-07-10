@@ -9,6 +9,8 @@
         [Parameter(Mandatory=$true)]
         $Data,
 
+        [string] $Method = 'POST',
+
         [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [string] $Uri
     )
@@ -17,6 +19,6 @@
     {
         $json = $Data | ConvertTo-Json
         
-        return Post-String -ContentType 'application/json' -Credential $Credential -Text $json -Uri $Uri | ConvertFrom-Json
+        return Post-String -ContentType 'application/json' -Credential $Credential -Text $json -Uri $Uri -Method $Method | ConvertFrom-Json
     }
 }

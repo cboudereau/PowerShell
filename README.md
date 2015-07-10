@@ -25,11 +25,26 @@ Get All or specified Project from the teamcity server. The Project parameter is 
 Project parameter correspond to the Project ID in the edit mode project on TeamCity interface
 
 ```powershell
-  Get-TeamCityProject -Project <YourProject>
+  # Tap tab to autocomplete parameter
+  Get-TeamCityProject "project blair witch"
+  
+  #or
+  Get-TeamCityProject -Project
 ```
 
+### Create-TeamCityProject
 ```powershell
-  Get-TeamCityProject -Project
+  #Create Project at Root Level
+  Create-TeamCityProject "ProjectBlairWitch"
+  
+  #Create Child Project
+  Get-TeamCityProject "NetProject" | Create-TeamCityProject "ProjectBlairWitch"
+```
+
+### Delete-TeamCityProject
+```powershell
+  #Delete Project
+  Get-TeamCityProject "NetProject" | Delete-TeamCityProject
 ```
 
 ### Get-BuildType 
