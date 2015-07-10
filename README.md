@@ -103,5 +103,12 @@ Tag a given build
    Get-BuildType | Start-Build -Wait
 ```
 
+### Get-Change
+```powershell
+   #Start all builds and wait the result in a progressbar :)
+   Get-BuildType | Get-Build -Last | Get-Change
+```
+
+
 ### Pipelining
   Thanks to PowerShell Pipeline, you can combine commands even if the output return a list. In this case an implicit foreach occurs on the next command. For example if the command Get-BuildTypes return 3 buildTypes then if you pipe to Start-Build, the 3 buildType starts

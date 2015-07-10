@@ -17,7 +17,7 @@
 
     Process
     {
-        $builds += $Build
+        $builds += $_
     }
 
     End
@@ -31,28 +31,29 @@
         while($percent -lt 100) 
         {
             $states = $builds | % { 
-                $queuedBuild = Get-TeamCityResource -Credential $Credential -Href $_
-                
+                $queuedBuild = $_ | Get-TeamCityResource -Credential $Credential
                 $state = $queuedBuild.state
                 $percentComplete = if($state -eq 'finished'){ 100 } elseif($queuedBuild.percentageComplete){ $queuedBuild.percentageComplete } else { 0 }
                 $statusText = if($queuedBuild.statusText) { $queuedBuild.statusText } else { "work in progress" }
-                return [pscustomobject]@{ build = $queuedBuild; complete = $percentComplete; statusText = $statusText } }
+                return [pscustomobject]@{ build = $queuedBuild; complete = $percentComplete; statusText = $statusText; state = $state } }
 
             $states | % { Write-Progress -PercentComplete $_.complete -Activity $_.build.buildTypeId -Id $_.build.id -CurrentOperation $_.statusText -Status $_.build.state }
 
             $percent = ($states | % { $_.complete } | Measure-Object -Average).Average
 
-            Start-Sleep -Seconds 1
+            if($percent -eq 100)
+            {
+                $states | % { 
+                    $changeTexts = $_.build | Get-Change | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
+                    $changes = $changeTexts -join  "`r`n"
+                    
+                    Write-Host "Build $($_.build.buildTypeId) is $($_.state) with status '$($_.statusText)' `r`n$($changes)" }
+            }
+
+            else
+            {
+                Start-Sleep -Seconds 1
+            }
         }
-
-        $builds | % {
-            $build = Get-TeamCityResource -Credential $Credential -Href $_
-            $changes = Get-TeamCityResource -Credential $Credential -Href $($build.changes.href)
-            
-            $changeText = $changes.change | % { 
-                $changeDetail = Get-Changes -Change $_.id
-                return "change #$($changeDetail.version) by $($changeDetail.username) with comment '$($changeDetail.comment)' `r`n" }
-
-            Write-Host "$($build.buildTypeId) was $($build.state) with status '$($build.statusText)'$changeText" }
     }
 }

@@ -43,7 +43,9 @@
 
         if($Wait)
         {
-            $started | Get-BuildStatus
+            $started | Get-BuildStatus | Out-Null
         }
+
+        return $started
     }
 }

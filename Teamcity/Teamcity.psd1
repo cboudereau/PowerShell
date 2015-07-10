@@ -62,6 +62,8 @@ FunctionsToExport = @(
 'Download-AllArtifacts'
 'Get-Build'
 'Get-BuildType'
+'Get-BuildStatus'
+'Get-Change'
 'Get-TeamCityProject'
 'Pin-Build'
 'Set-TeamCityServer'
