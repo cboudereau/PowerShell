@@ -39,6 +39,16 @@ Project parameter correspond to the Project ID in the edit mode project on TeamC
   
   #Create Child Project
   Get-TeamCityProject "NetProject" | Create-TeamCityProject "ProjectBlairWitch"
+  
+  #Given the current path c:\dev\MyProject and the file FSharp.Data.Portable7.sln
+  #The autocomplete Name of this CmdLet will find solution name recursively when press tab
+  #The result is a project in teamcity named FSharpDataPortable7 under Root project
+  cd c:\dev\MyProject
+  Create-TeamCityProject FSharp.Data.Portable7
+  
+  #Under Parent project
+  cd c:\dev\MyProject
+  Get-TeamCityProject Net | Create-TeamCityProject FSharp.Data.Portable7
 ```
 
 ### Delete-TeamCityProject

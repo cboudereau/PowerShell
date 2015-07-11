@@ -3,7 +3,7 @@ function Create-TeamCityProject()
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipeline)]
+        [Parameter(Mandatory=$true)]
         [string] $Name,
 
         [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true)]
@@ -23,4 +23,9 @@ function Create-TeamCityProject()
 
         Post-ToJson -Uri $uri -Credential $Credential -Data $project -ErrorAction SilentlyContinue
     }
+}
+
+Register-ParameterCompleter -CommandName 'Create-TeamCityProject' -ParameterName 'Name' -ScriptBlock {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+    (Get-Solution -Name $wordToComplete) | % { $_ -replace ".sln" } | % { New-CompletionResult $_ -ToolTip ($_)}
 }
