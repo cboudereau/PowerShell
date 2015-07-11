@@ -61,6 +61,7 @@ NestedModules = @()
 FunctionsToExport = @(
 'Create-BuildType'
 'Create-TeamCityProject'
+'Delete-BuildType'
 'Delete-TeamCityProject'
 'Download-AllArtifacts'
 'Get-Build'

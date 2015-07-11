@@ -5,7 +5,7 @@ function Create-BuildType()
     (
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
         [Alias('id')]
-        [string] $ParentId,
+        [string] $ProjectId,
         
         [Parameter(Mandatory=$true)]
         [string] $Name,
@@ -15,12 +15,11 @@ function Create-BuildType()
 
     Process
     {
-        $parent = [pscustomobject]@{ id=$ParentId }
-        $project = [pscustomobject]@{ name=$Name; parentProject=$parent }
+        $buildType = [pscustomobject]@{ name=$Name; projectId=$ProjectId }
 
-        $uri = "projects" | Get-TeamCityUri
+        $uri = "buildTypes" | Get-TeamCityUri
         $credential = Get-TeamCityCredential -Credential $Credential
 
-        Post-ToJson -Uri $uri -Credential $Credential -Data $project
+        Post-ToJson -Uri $uri -Credential $Credential -Data $buildType
     }
 }

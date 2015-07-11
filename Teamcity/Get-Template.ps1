@@ -4,14 +4,24 @@
     Param
     (
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [Alias('Templates')]
-        $Template,
+        [Alias('id')]
+        $projectId,
+
+        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true)]
+        $parentProjectId,
 
         [pscredential] $Credential
     )
 
     Process
     {
-        $Template.buildType | % { Get-TeamCityResource -Credential $Credential -Href $_.href }
+        $uri = "projects/id:$projectId/templates"
+
+        (Get-TeamCityResource -Credential $Credential -RelativePath $uri).buildType
+
+        if($parentProjectId)
+        {
+            Get-TeamCityProject -Project $parentProjectId | Get-Template
+        }
     }
 }
