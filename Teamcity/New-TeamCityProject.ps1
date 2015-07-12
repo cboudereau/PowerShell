@@ -1,4 +1,4 @@
-function Create-TeamCityProject()
+function New-BuildType()
 {
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param
@@ -25,7 +25,7 @@ function Create-TeamCityProject()
     }
 }
 
-Register-ParameterCompleter -CommandName 'Create-TeamCityProject' -ParameterName 'Name' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'New-BuildType' -ParameterName 'Name' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
     (Get-Solution -Name $wordToComplete) | % { $_ -replace ".sln" } | % { New-CompletionResult $_ -ToolTip ($_)}
 }

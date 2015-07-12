@@ -1,6 +1,6 @@
-﻿. $psScriptRoot\Create-BuildType.ps1
-. $psScriptRoot\Create-TeamCityProject.ps1
-. $psScriptRoot\Delete-BuildType.ps1
+﻿. $psScriptRoot\New-BuildType.ps1
+. $psScriptRoot\New-BuildType.ps1
+. $psScriptRoot\Remove-BuildType.ps1
 . $psScriptRoot\Delete-TeamCityProject.ps1
 . $psScriptRoot\Download-AllArtifacts.ps1
 . $psScriptRoot\Download-File.ps1

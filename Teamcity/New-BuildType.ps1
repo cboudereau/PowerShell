@@ -1,4 +1,4 @@
-function Create-BuildType()
+function New-BuildType()
 {
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param

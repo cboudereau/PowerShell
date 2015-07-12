@@ -16,7 +16,7 @@ function New-FromTemplate()
     Process
     {
         $template = Get-BuildType -BuildType $TemplateId
-        $buildType = Create-BuildType -ProjectId $ProjectId -Name $template.name -Credential $Credential
+        $buildType = New-BuildType -ProjectId $ProjectId -Name $template.name -Credential $Credential
         $uri = Get-TeamCityUri -RelativePath "buildTypes/id:$($buildType.id)/template"
         $credential = Get-TeamCityCredential -Credential $Credential
 

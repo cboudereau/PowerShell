@@ -1,4 +1,4 @@
-function Delete-BuildType()
+function Remove-BuildType()
 {
     [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
     Param

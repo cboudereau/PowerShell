@@ -32,29 +32,40 @@ Project parameter correspond to the Project ID in the edit mode project on TeamC
   Get-TeamCityProject -Project
 ```
 
-### Create-TeamCityProject
+### New-TeamCityProject
 ```powershell
-  #Create Project at Root Level
-  Create-TeamCityProject "ProjectBlairWitch"
-  
-  #Create Child Project
-  Get-TeamCityProject "NetProject" | Create-TeamCityProject "ProjectBlairWitch"
-  
-  #Given the current path c:\dev\MyProject and the file FSharp.Data.Portable7.sln
-  #The autocomplete Name of this CmdLet will find solution name recursively when press tab
-  #The result is a project in teamcity named FSharpDataPortable7 under Root project
-  cd c:\dev\MyProject
-  Create-TeamCityProject FSharp.Data.Portable7
-  
-  #Under Parent project
-  cd c:\dev\MyProject
-  Get-TeamCityProject Net | Create-TeamCityProject FSharp.Data.Portable7
+  New-TeamCityProject "NetProject"
 ```
 
 ### Delete-TeamCityProject
 ```powershell
   #Delete Project
   Get-TeamCityProject "NetProject" | Delete-TeamCityProject
+```
+
+### New-BuildType
+```powershell
+  #Create Project at Root Level
+  New-BuildType "ProjectBlairWitch"
+  
+  #Create Child Project
+  Get-TeamCityProject "NetProject" | New-BuildType "ProjectBlairWitch"
+  
+  #Given the current path c:\dev\MyProject and the file FSharp.Data.Portable7.sln
+  #The autocomplete Name of this CmdLet will find solution name recursively when press tab
+  #The result is a project in teamcity named FSharpDataPortable7 under Root project
+  cd c:\dev\MyProject
+  New-BuildType FSharp.Data.Portable7
+  
+  #Under Parent project
+  cd c:\dev\MyProject
+  Get-TeamCityProject Net | New-BuildType FSharp.Data.Portable7
+```
+
+### Delete-BuildType
+```powershell
+  #Delete Project
+  Get-BuildType "Net_Framework" | Delete-BuildType
 ```
 
 ### Get-BuildType 
@@ -141,10 +152,10 @@ The solution name is bind to the project name.
 ```powershell
    #This cmdlet pipeline create a project called FSharp.Temporality into Net project with the template Net_Build.
    #Cmdlets Get-TeamCityProject support autocomplete by getting Teamcity Projects, Create-Team
-   #Goto to the folder containing the solution and  Create-TeamCityProject find the solution
+   #Goto to the folder containing the solution and  New-BuildType find the solution
    #New-FromTemplate create a build configuration with the same name as given template
    cd c:\sources\FSharp.Temporality
-   Get-TeamCityProject Net | Create-TeamCityProject FSharp.Temporality | New-FromTemplate Net_Build
+   Get-TeamCityProject Net | New-BuildType FSharp.Temporality | New-FromTemplate Net_Build
    #In Teamcity there is Project Net > Project FSharp.Temporality > Build
 ```
 
