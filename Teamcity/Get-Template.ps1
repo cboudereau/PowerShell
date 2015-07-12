@@ -1,27 +1,30 @@
 ﻿function Get-Template()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName)]
         [Alias('id')]
-        $projectId,
-
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true)]
-        $parentProjectId,
+        [string] $ProjectId,
 
         [pscredential] $Credential
     )
 
     Process
     {
+        if(!$ProjectId)
+        {
+            return (Get-TeamCityResource -Credential $Credential -RelativePath "buildTypes?locator=templateFlag:true").buildType
+        }
+        
         $uri = "projects/id:$projectId/templates"
-
+        $project = Get-TeamCityProject -Project $ProjectId
+        
         (Get-TeamCityResource -Credential $Credential -RelativePath $uri).buildType
 
-        if($parentProjectId)
+        if($project.parentProjectId)
         {
-            Get-TeamCityProject -Project $parentProjectId | Get-Template
+            Get-Template -projectId $project.parentProjectId
         }
     }
 }

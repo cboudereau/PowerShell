@@ -134,6 +134,19 @@ Tag a given build
    Get-BuildType | Get-Build -Last | Get-Change
 ```
 
+### Generate Build from solution with template
+You have to setup a template which the solution name is the single parameter of the build.
+The solution name is bind to the project name.
+
+```powershell
+   #This cmdlet pipeline create a project called FSharp.Temporality into Net project with the template Net_Build.
+   #Cmdlets Get-TeamCityProject support autocomplete by getting Teamcity Projects, Create-Team
+   #Goto to the folder containing the solution and  Create-TeamCityProject find the solution
+   #New-FromTemplate create a build configuration with the same name as given template
+   cd c:\sources\FSharp.Temporality
+   Get-TeamCityProject Net | Create-TeamCityProject FSharp.Temporality | New-FromTemplate Net_Build
+   #In Teamcity there is Project Net > Project FSharp.Temporality > Build
+```
 
 ### Pipelining
   Thanks to PowerShell Pipeline, you can combine commands even if the output return a list. In this case an implicit foreach occurs on the next command. For example if the command Get-BuildTypes return 3 buildTypes then if you pipe to Start-Build, the 3 buildType starts

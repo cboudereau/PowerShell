@@ -70,6 +70,7 @@ FunctionsToExport = @(
 'Get-Change'
 'Get-TeamCityProject'
 'Get-Template'
+'New-FromTemplate'
 'Pin-Build'
 'Set-TeamCityServer'
 'Start-Build'

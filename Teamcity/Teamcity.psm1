@@ -16,6 +16,7 @@
 . $psScriptRoot\Get-TeamCityResource.ps1
 . $psScriptRoot\Get-TeamCityUri.ps1
 . $psScriptRoot\Get-Template.ps1
+. $psScriptRoot\New-FromTemplate.ps1
 . $psScriptRoot\Pin-Build.ps1
 . $psScriptRoot\Post-String.ps1
 . $psScriptRoot\Post-ToJson.ps1
