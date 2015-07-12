@@ -20,7 +20,9 @@ function New-FromTemplate()
         $uri = Get-TeamCityUri -RelativePath "buildTypes/id:$($buildType.id)/template"
         $credential = Get-TeamCityCredential -Credential $Credential
 
-        Post-String -Accept 'application/json' -ContentType 'text/plain' -Credential $credential -Uri $uri -Method PUT -Text $TemplateId
+        Post-String -Accept 'application/json' -ContentType 'text/plain' -Credential $credential -Uri $uri -Method PUT -Text $TemplateId | Out-Null
+        Write-Host "$($buildType.name) was successfully created on project $ProjectId based on template $($template.id)"
+        $buildType
     }
 }
 

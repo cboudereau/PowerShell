@@ -1,4 +1,4 @@
-function New-BuildType()
+function New-TeamcityProject()
 {
     [CmdletBinding(SupportsShouldProcess=$true)]
     Param
@@ -21,11 +21,12 @@ function New-BuildType()
         $uri = "projects" | Get-TeamCityUri
         $credential = Get-TeamCityCredential -Credential $Credential
 
-        Post-ToJson -Uri $uri -Credential $Credential -Data $project -ErrorAction SilentlyContinue
+        Post-ToJson -Uri $uri -Credential $Credential -Data $project
+        Write-Host "Project $($project.name) was successfully created on project $ParentId"
     }
 }
 
-Register-ParameterCompleter -CommandName 'New-BuildType' -ParameterName 'Name' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'New-TeamcityProject' -ParameterName 'Name' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
     (Get-Solution -Name $wordToComplete) | % { $_ -replace ".sln" } | % { New-CompletionResult $_ -ToolTip ($_)}
 }

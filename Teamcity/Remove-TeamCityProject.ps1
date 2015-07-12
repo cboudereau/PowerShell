@@ -1,4 +1,4 @@
-function Delete-TeamCityProject()
+function Remove-TeamCityProject()
 {
     [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
     Param
@@ -28,4 +28,9 @@ function Delete-TeamCityProject()
             }
         }
     }
+}
+
+Register-ParameterCompleter -CommandName 'Remove-TeamCityProject' -ParameterName 'Id' -ScriptBlock {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+    (Get-TeamCityProject) | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name,$_.id )}
 }
