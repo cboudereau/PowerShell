@@ -39,7 +39,9 @@
                 $statusText = if($queuedBuild.statusText) { $queuedBuild.statusText } else { "work in progress" }
                 return [pscustomobject]@{ build = $queuedBuild; complete = $percentComplete; statusText = $statusText; state = $state; isFinished = $isFinished } }
 
-            $states | % { Write-Progress -PercentComplete $_.complete -Activity $_.build.buildTypeId -Id $_.build.id -CurrentOperation $_.statusText -Status $_.build.state }
+            $states | % { 
+                Write-Host "$($_.build.buildTypeId) is $($_.build.state) with status : $($_.statusText)"
+                Write-Progress -PercentComplete $_.complete -Activity $_.build.buildTypeId -Id $_.build.id -CurrentOperation $_.statusText -Status $_.build.state }
 
             $anyRunning = $($states | Where-Object { !$_.isFinished })
 
@@ -47,7 +49,7 @@
             {
                 $states | % { 
                     $changeTexts = $_.build | Get-Change | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
-                    $changes = $changeTexts -join  "`r`n"
+                    $changes = $changeTexts -join "`r`n"
                     
                     Write-Host "Build $($_.build.buildTypeId) is $($_.state) with status : $($_.build.status)($($_.statusText))`r`n$($changes)" }
             }
