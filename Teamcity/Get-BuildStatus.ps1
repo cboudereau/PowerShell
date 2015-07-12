@@ -29,8 +29,6 @@
             return
         }
 
-
-
         while($anyRunning) 
         {
             $states = $builds | % { 
@@ -51,7 +49,7 @@
                     $changeTexts = $_.build | Get-Change | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
                     $changes = $changeTexts -join  "`r`n"
                     
-                    Write-Host "Build $($_.build.buildTypeId) is $($_.state) with $($_.statusText) status `r`n$($changes)" }
+                    Write-Host "Build $($_.build.buildTypeId) is $($_.state) with status : $($_.build.status)($($_.statusText))`r`n$($changes)" }
             }
 
             else

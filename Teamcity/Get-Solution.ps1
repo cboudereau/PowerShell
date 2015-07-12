@@ -15,10 +15,6 @@
     {
         $Path = Resolve-Path $Path
         
-        $directory = Get-ChildItem -Path $Path -Directory
-
-        if(!$directory) { return }
-
         $solutions = Get-ChildItem -File -Filter "*$Name*.sln" -Path $Path
 
         if($solutions)
