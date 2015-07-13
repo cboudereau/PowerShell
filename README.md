@@ -5,15 +5,16 @@
 Teamcity module: Get build type, builds, Start and pin build and more
 
 IMPORTANT :
-First you have to set TeamCity server by calling Set-TeamCityServer. By default the uri parameter is http://localhost:7777/httpAuth/app/rest/ for test purpose
+First you have to set TeamCity server by calling Set-TeamCityServer. By default the uri parameter is http://localhost:7777/httpAuth/app/rest/ for testing purpose
 
-In all cmdlet we use Net_Framework build type. In your test you have to replace it or just let the Get-BuildTypes finding all TeamCity buildType from the configured server
+In all cmdlet we use Net_Framework, or other build types (Build configuration are called Build Type in TeamcityRest API). 
+In your test you have to replace it or just let the Get-BuildTypes finding all TeamCity buildTypes from the configured server
 
 ## TeamCity Module
 
 ### Set-TeamCityServer
 Set the TeamCity Server to avoid server uri repetition. By default, Uri is set to http://localhost:7777/
-Note : if you use httpAuth instead of guest, others cmdlet prompt the credential if not set. All cmdlet reuse this credential in order to communicate with TeamCity REST Api.
+Note : if you use httpAuth instead of guest, others cmdlet prompt the credential if not set. All cmdlet reuse same credential allong the powershell session.
 
 ```powershell
   Set-TeamCityServer -Uri http://<your-teamcity-server>
@@ -22,25 +23,14 @@ Note : if you use httpAuth instead of guest, others cmdlet prompt the credential
 ### Get-TeamCityProject
 Get All or specified Project from the teamcity server. The Project parameter is autocompleted by getting the project list from the teamcity server.
 
-Project parameter correspond to the Project ID in the edit mode project on TeamCity interface
+Project parameter is the Project ID in the Teamcity project settings
 
 ```powershell
   # Tap tab to autocomplete parameter
   Get-TeamCityProject "project blair witch"
   
   #or
-  Get-TeamCityProject -Project
-```
-
-### New-TeamCityProject
-```powershell
-  New-TeamCityProject "NetProject"
-```
-
-### Remove-TeamCityProject
-```powershell
-  #Remove Project
-  Get-TeamCityProject "NetProject" | Remove-TeamCityProject
+  Get-TeamCityProject -Project "project blair witch"
 ```
 
 ### New-TeamCityProject
@@ -51,15 +41,31 @@ Project parameter correspond to the Project ID in the edit mode project on TeamC
   #Create Child Project
   Get-TeamCityProject "NetProject" | New-BuildType "ProjectBlairWitch"
   
-  #Given the current path c:\dev\MyProject and the file FSharp.Data.Portable7.sln
-  #The autocomplete Name of this CmdLet will find solution name recursively when press tab
+  #Given the current path c:\dev\MyProject which contains the file FSharp.Data.Portable7.sln
+  #The autocomplete Name of this CmdLet will find all solutions name recursively when press tab
   #The result is a project in teamcity named FSharpDataPortable7 under Root project
+  #This mode permit to call this cmdlet into VisualStudio Nuget powershell host
   cd c:\dev\MyProject
   New-TeamCityProject FSharp.Data.Portable7
   
   #Under Parent project
   cd c:\dev\MyProject
   Get-TeamCityProject Net | New-TeamCityProject FSharp.Data.Portable7
+  
+  #Into VisualStudio Nuget Powershell Host
+  #Create Project, add the build based on template and start it :) !
+  Get-TeamCityProject Net | New-TeamCityProject FSharp.Data.Portable7 | New-FromTemplate Net_Build | Start-Build -Wait
+
+```
+
+### Remove-TeamCityProject
+```powershell
+  
+  #Remove Project
+  Remove-TeamCityProject "NetProject"
+
+  #or
+  Get-TeamCityProject "NetProject" | Remove-TeamCityProject
 ```
 
 ### Get-BuildType 
