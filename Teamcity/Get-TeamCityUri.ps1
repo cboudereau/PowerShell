@@ -6,8 +6,6 @@
         [Parameter(ValueFromPipeline)]
         [string] $RelativePath = "",
 
-        [string] $BasePath = "httpAuth/app/rest/",
-
         [string[]] $Parameters = @()
     )
 
@@ -25,12 +23,12 @@
         
         if($env:TEAMCITY)
         {
+            $path = [System.IO.Path]::Combine("httpAuth/app/rest/", $RelativePath)
             $root = New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY)
-            $rootBasePath = New-Object -TypeName System.Uri -ArgumentList @($root, $BasePath)
-            $path = "$RelativePath$query"
-            $controller = New-Object -TypeName System.Uri -ArgumentList @($rootBasePath, $path)
-            
-            return $controller.OriginalString
+
+            $uri = New-Object -TypeName System.Uri -ArgumentList @($root, "$path$query")
+                        
+            return $uri.AbsoluteUri
         }
         else
         {

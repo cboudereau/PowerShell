@@ -14,13 +14,13 @@
     {
         if(!$ProjectId)
         {
-            return (Get-TeamCityResource -Credential $Credential -RelativePath "buildTypes?locator=templateFlag:true").buildType
+            return (Get-TeamCityResource -Credential $Credential -Href "buildTypes?locator=templateFlag:true").buildType
         }
         
         $uri = "projects/id:$projectId/templates"
         $project = Get-TeamCityProject -Project $ProjectId
         
-        (Get-TeamCityResource -Credential $Credential -RelativePath $uri).buildType
+        (Get-TeamCityResource -Credential $Credential -Href $uri).buildType
 
         if($project.parentProjectId)
         {

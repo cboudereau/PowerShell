@@ -3,11 +3,8 @@ function Get-TeamCityResource()
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $Href = "httpAuth/app/rest/",
-        
-        [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $RelativePath,
+        [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string] $Href,
         
         [string[]] $Parameters,
 
@@ -17,7 +14,7 @@ function Get-TeamCityResource()
     Process
     {
         $credential = Get-TeamCityCredential $Credential
-        $uri = Get-TeamCityUri -BasePath $Href -RelativePath $RelativePath -Parameters $Parameters
+        $uri = Get-TeamCityUri -RelativePath $Href -Parameters $Parameters
 
         return Get-FromJson -Credential $credential -Uri $uri
     }

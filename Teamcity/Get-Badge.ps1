@@ -11,7 +11,7 @@
 
     Process
     {
-        $uri = Get-TeamCityUri -RelativePath "/buildType:(id:$Id)/statusIcon"
+        $uri = Get-TeamCityUri -RelativePath "builds/buildType:(id:$Id)/statusIcon"
         Write-Host $uri
     }
 }

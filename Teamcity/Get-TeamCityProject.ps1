@@ -14,10 +14,10 @@ function Get-TeamCityProject()
     {
         if($Project)
         {
-            return Get-TeamCityResource -Credential $Credential -RelativePath projects/id:$Project
+            return Get-TeamCityResource -Credential $Credential -Href projects/id:$Project
         }
         
-        return (Get-TeamCityResource -Credential $Credential -RelativePath projects).project
+        return (Get-TeamCityResource -Credential $Credential -Href projects).project
     }
 }
 

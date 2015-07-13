@@ -19,8 +19,8 @@
 
     Process
     {
-        $selector = "repository/downloadAll/$BuildTypeId/$BuildId`:id/artifacts.zip"
-        $uri = $selector | Get-TeamCityUri -BasePath ""
+        $selector = "/repository/downloadAll/$BuildTypeId/$BuildId`:id/artifacts.zip"
+        $uri = $selector | Get-TeamCityUri
 
         $credential = Get-TeamCityCredential
 

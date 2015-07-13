@@ -21,7 +21,7 @@
         if($BuildType)
         {
             $parameters = @("build=$Id")
-            $changes = (Get-TeamCityResource -Credential $Credential -RelativePath $uri -Parameters $parameters)
+            $changes = (Get-TeamCityResource -Credential $Credential -Href $uri -Parameters $parameters)
             if($changes.change){ $changes.change | Get-Change }
             else { @() }
         }
@@ -29,7 +29,7 @@
         else
         {
             $uri += "id:$Id"
-            (Get-TeamCityResource -Credential $Credential -RelativePath $uri -Parameters $parameters)
+            (Get-TeamCityResource -Credential $Credential -Href $uri -Parameters $parameters)
         }
     }
 }

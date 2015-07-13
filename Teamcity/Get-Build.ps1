@@ -79,6 +79,6 @@
 
         $uri = "builds/$request"
 
-        (Get-TeamCityResource -Credential $Credential -RelativePath $uri).build
+        (Get-TeamCityResource -Credential $Credential -Href $uri).build
     }
 }

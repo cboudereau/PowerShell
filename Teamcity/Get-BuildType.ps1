@@ -28,10 +28,10 @@ function Get-BuildType()
     {
         if($buildTypes)
         {
-            return $buildTypes | ForEach-Object { Get-TeamCityResource -Credential $Credential -RelativePath buildTypes/id:$_ }
+            return $buildTypes | ForEach-Object { Get-TeamCityResource -Credential $Credential -Href buildTypes/id:$_ }
         }
 
-        return Get-TeamCityResource -RelativePath buildTypes -Credential $Credential
+        return Get-TeamCityResource -Href buildTypes -Credential $Credential
     }
 }
 
