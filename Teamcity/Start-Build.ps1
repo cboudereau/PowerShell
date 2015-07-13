@@ -9,7 +9,9 @@
         
         [switch] $Wait,
         
-        [switch] $IsPiped,
+        [switch] $Top,
+
+        [switch] $ShowBuild,
 
         [pscredential] $Credential
     )
@@ -39,7 +41,7 @@
         }
         
         $started = $uniqueBuildTypes | % { 
-            $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_ }
+            $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_; moveToTop=$Top }
             Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop
             Write-Host "$_ was successfully added to the queue" }
 

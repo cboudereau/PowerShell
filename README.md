@@ -171,5 +171,17 @@ The solution name is bind to the project name.
    #In Teamcity there is Project Net > Project FSharp.Temporality > Build
 ```
 
+### Get-Badge
+Return the build badge from the build
+```powershell
+   Get-BuildBadge Net_Framework
+```
+
+### Get-TeamCityWebLink
+Return the web link from the build
+```powershell
+   Get-TeamCityWebLink Net_Framework
+```
+
 ### Pipelining
   Thanks to PowerShell Pipeline, you can combine commands even if the output return a list. In this case an implicit foreach occurs on the next command. For example if the command Get-BuildTypes return 3 buildTypes then if you pipe to Start-Build, the 3 buildType starts

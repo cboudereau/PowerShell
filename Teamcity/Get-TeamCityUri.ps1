@@ -30,7 +30,7 @@
             $path = "$RelativePath$query"
             $controller = New-Object -TypeName System.Uri -ArgumentList @($rootBasePath, $path)
             
-            return $controller.AbsoluteUri
+            return $controller.OriginalString
         }
         else
         {

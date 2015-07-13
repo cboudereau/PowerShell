@@ -1,5 +1,6 @@
 ﻿. $psScriptRoot\Download-AllArtifacts.ps1
 . $psScriptRoot\Download-File.ps1
+. $psScriptRoot\Get-Badge.ps1
 . $psScriptRoot\Get-Build.ps1
 . $psScriptRoot\Get-BuildStatus.ps1
 . $psScriptRoot\Get-BuildType.ps1
@@ -11,6 +12,7 @@
 . $psScriptRoot\Get-TeamCityProject.ps1
 . $psScriptRoot\Get-TeamCityResource.ps1
 . $psScriptRoot\Get-TeamCityUri.ps1
+. $psScriptRoot\Get-TeamCityWebLink.ps1
 . $psScriptRoot\Get-Template.ps1
 . $psScriptRoot\New-BuildType.ps1
 . $psScriptRoot\New-FromTemplate.ps1

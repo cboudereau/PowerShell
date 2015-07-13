@@ -60,11 +60,13 @@ NestedModules = @()
 # Functions to export from this module
 FunctionsToExport = @(
 'Download-AllArtifacts'
+'Get-Badge'
 'Get-Build'
 'Get-BuildStatus'
 'Get-BuildType'
 'Get-Change'
 'Get-TeamCityProject'
+'Get-TeamCityWebLink'
 'Get-Template'
 'New-BuildType'
 'New-FromTemplate'
