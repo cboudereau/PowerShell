@@ -9,6 +9,7 @@
         [Parameter(Mandatory)]
         $Data,
 
+        [ValidateSet('POST','PUT','DELETE')]
         [string] $Method = 'POST',
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
