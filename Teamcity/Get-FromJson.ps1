@@ -3,10 +3,10 @@
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Position=0, Mandatory)]
+        [Parameter(Mandatory)]
         [pscredential] $Credential,
 
-        [Parameter(Position=1, Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string] $Uri
     )
 
