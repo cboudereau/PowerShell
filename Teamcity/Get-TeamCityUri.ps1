@@ -1,9 +1,9 @@
 ﻿function Get-TeamCityUri()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(ValueFromPipeline=$true)]
+        [Parameter(ValueFromPipeline)]
         [string] $RelativePath = "",
 
         [string] $BasePath = "httpAuth/app/rest/",

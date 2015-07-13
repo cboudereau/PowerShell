@@ -1,13 +1,13 @@
 function New-BuildType()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('id')]
         [string] $ProjectId,
         
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [string] $Name,
 
         [pscredential] $Credential

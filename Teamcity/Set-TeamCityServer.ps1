@@ -1,9 +1,9 @@
 ﻿function Set-TeamCityServer()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         $Uri = "http://localhost:7777/"
     )
 

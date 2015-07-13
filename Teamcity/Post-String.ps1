@@ -1,12 +1,12 @@
 ﻿function Post-String()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [string] $ContentType,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [pscredential] $Credential,
 
         [string] $Text,
@@ -16,7 +16,7 @@
 
         [string] $Accept,
 
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string] $Uri
 
     )

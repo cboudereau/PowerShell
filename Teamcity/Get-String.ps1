@@ -1,15 +1,15 @@
 ﻿function Get-String()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$true)]
+        [Parameter(Position=0, Mandatory)]
         [string] $Accept,
 
-        [Parameter(Position=1, Mandatory=$true)]
+        [Parameter(Position=1, Mandatory)]
         [pscredential] $Credential,
 
-        [Parameter(Position=2, Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Position=2, Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string] $Uri
     )
 

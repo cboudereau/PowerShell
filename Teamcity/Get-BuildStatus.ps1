@@ -1,9 +1,9 @@
 ﻿function Get-BuildStatus()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('href')]
         [string] $Build,
         [pscredential] $Credential

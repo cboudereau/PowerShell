@@ -1,11 +1,11 @@
 ﻿function Pin-Build()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
         [switch] $Delete,
 
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [Parameter(Mandatory, ValueFromPipeline)]
         $Build
     )
 

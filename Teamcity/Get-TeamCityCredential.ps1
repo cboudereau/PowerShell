@@ -1,13 +1,13 @@
 ﻿function Get-TeamCityCredential()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
         [Parameter(
             Position=0, 
             Mandatory=$false, 
-            ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true)
+            ValueFromPipeline,
+            ValueFromPipelineByPropertyName)
         ]
         [pscredential] $Credential
     )

@@ -1,9 +1,9 @@
 function Remove-BuildType()
 {
-    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [string] $Id,
         
         [pscredential] $Credential

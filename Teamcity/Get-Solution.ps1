@@ -1,9 +1,9 @@
 ﻿function Get-Solution()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName)]
         [string] $Name = "",
 
         [string] $Path = '.',

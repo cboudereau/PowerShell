@@ -1,13 +1,13 @@
 ﻿function Tag-Build()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
         [string] $Tag,
         
         [switch] $Delete,
 
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [Parameter(Mandatory, ValueFromPipeline)]
         $Build
     )
 

@@ -1,15 +1,14 @@
 ﻿function Download-File()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Position=0, Mandatory=$true)]
+        [Parameter(Mandatory)]
         [string] $Uri,
 
-        [Parameter(Position=1, Mandatory=$true)]
+        [Parameter(Mandatory)]
         [pscredential] $Credential,
 
-        [Parameter(Position=2, Mandatory=$false)]
         [string] $Folder = 'download'
     )
 

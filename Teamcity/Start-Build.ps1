@@ -1,9 +1,9 @@
 ﻿function Start-Build()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('buildTypeId', 'id')]
         [string] $BuildType,
         

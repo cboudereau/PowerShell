@@ -1,12 +1,12 @@
 function New-TeamcityProject()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [string] $Name,
 
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName)]
         [Alias('id')]
         [string] $ParentId = "_Root",
         

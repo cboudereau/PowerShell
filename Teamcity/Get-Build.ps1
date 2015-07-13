@@ -1,6 +1,6 @@
 ﻿function Get-Build()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
         [ValidateSet('ALL','SUCCESS','FAILURE')]
@@ -22,7 +22,7 @@
 
         [switch] $Last,
 
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('id')]
         [string] $BuildType,
 

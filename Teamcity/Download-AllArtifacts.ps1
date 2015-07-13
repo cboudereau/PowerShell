@@ -1,25 +1,29 @@
 ﻿function Download-AllArtifacts()
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(Mandatory=$false)]
         [string] $Directory = 'download',
 
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-        $Build
-    )
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [Alias('id')]
+        $BuildId,
+        
+		[Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        $BuildTypeId,
+
+		[Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [Alias('number')]
+        $BuildNumber
+	)
 
     Process
     {
-        $buildId = $Build.id
-        $buildTypeId = $Build.buildTypeId
-        $buildNumber = $Build.number
-        $selector = "repository/downloadAll/$buildTypeId/$buildId`:id/artifacts.zip"
+        $selector = "repository/downloadAll/$BuildTypeId/$BuildId`:id/artifacts.zip"
         $uri = $selector | Get-TeamCityUri -BasePath ""
 
         $credential = Get-TeamCityCredential
 
-        Download-File -Credential $credential -Uri $uri -Folder "download/$buildTypeId/$buildNumber"
+        Download-File -Credential $credential -Uri $uri -Folder "download/$BuildTypeId/$BuildNumber"
     }
 }
