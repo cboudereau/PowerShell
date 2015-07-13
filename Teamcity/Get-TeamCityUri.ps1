@@ -34,7 +34,7 @@
         }
         else
         {
-            Write-Error "TeamCity Server is not set, you should use Set-Server to set the TeamCity server address"
+            Write-Error "TeamCity Server is not set, you should use Set-TeamCityServer to set the TeamCity server address"
         }
     }
 }

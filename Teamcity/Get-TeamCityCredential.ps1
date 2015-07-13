@@ -3,12 +3,7 @@
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [Parameter(
-            Position=0, 
-            Mandatory=$false, 
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName)
-        ]
+        [Parameter(Mandatory=$false, ValueFromPipeline)]
         [pscredential] $Credential
     )
 
