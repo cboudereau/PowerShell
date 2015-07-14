@@ -5,19 +5,17 @@
     (
         [switch] $Delete,
 
-        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-        $Id,
-
-        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-        $BuildTypeId,
-
-        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-        $Number
+        [Parameter(Mandatory, ValueFromPipeline)]
+        $Build
     )
 
     Process
     {
-        $uri = "builds/id:$Id/pin/" | Get-TeamCityUri
+        $id = $Build.id
+        $buildTypeId = $Build.buildTypeId
+        $number = $Build.number
+        
+        $uri = "builds/id:$id/pin/" | Get-TeamCityUri
         $credential = Get-TeamCityCredential
 
         $method = 'PUT'
@@ -32,7 +30,7 @@
 
         Post-String -ContentType 'text/plain' -Credential $credential -Uri $uri -Method $method | Out-Null
 
-        Write-Host "Build $BuildTypeId #$Number was successfully $output"
+        Write-Host "Build $buildTypeId #$number was successfully $output"
 
         return $Build
     }
