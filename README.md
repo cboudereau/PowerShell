@@ -172,13 +172,15 @@ The solution name is bind to the project name.
 ```
 
 ### Get-Badge
-Return the build badge from the build
+Return the build badge from the build.
+Url is copied to clipboard
 ```powershell
    Get-BuildBadge Net_Framework
 ```
 
 ### Get-TeamCityWebLink
 Return the web link from the build
+Url is copied to clipboard
 ```powershell
    Get-TeamCityWebLink Net_Framework
 ```
