@@ -12,6 +12,8 @@
     Process
     {
         $uri = Get-TeamCityUri -RelativePath "/viewType.html?buildTypeId=$Id"
+        Write-Output $uri | clip
+        Write-Warning "copied to clipboard!"
         Write-Host $uri
     }
 }
