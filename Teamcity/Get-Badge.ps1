@@ -12,6 +12,8 @@
     Process
     {
         $uri = Get-TeamCityUri -RelativePath "builds/buildType:(id:$Id)/statusIcon"
+        Write-Output $uri | clip
+        Write-Warning "copied to clipboard!"
         Write-Host $uri
     }
 }
