@@ -1,4 +1,4 @@
-﻿function Download-TCFile()
+﻿function Download-TCFile
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

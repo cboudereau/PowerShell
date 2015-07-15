@@ -1,4 +1,4 @@
-﻿function Get-Solution()
+﻿function Get-Solution
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

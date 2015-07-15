@@ -1,4 +1,4 @@
-﻿function Get-FromJson()
+﻿function Get-FromJson
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

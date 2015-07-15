@@ -1,4 +1,4 @@
-﻿function Download-TCArtifacts()
+﻿function Download-TCArtifacts
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

@@ -1,4 +1,4 @@
-﻿function Get-String()
+﻿function Get-String
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

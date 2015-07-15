@@ -1,4 +1,4 @@
-﻿function Write-HostInfo()
+﻿function Write-HostInfo
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

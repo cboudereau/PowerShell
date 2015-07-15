@@ -1,4 +1,4 @@
-﻿function Get-TCBadge()
+﻿function Get-TCBadge
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

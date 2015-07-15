@@ -1,4 +1,4 @@
-﻿function Post-ToJson()
+﻿function Post-ToJson
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

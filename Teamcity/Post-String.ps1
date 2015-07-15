@@ -1,4 +1,4 @@
-﻿function Post-String()
+﻿function Post-String
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
