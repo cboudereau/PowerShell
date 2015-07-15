@@ -1,4 +1,4 @@
-﻿function Start-Build()
+﻿function Start-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -18,8 +18,8 @@
 
     Begin
     {
-        $uri = "buildQueue" | Get-TeamCityUri
-        $credential = Get-TeamCityCredential -Credential $Credential
+        $uri = "buildQueue" | Get-TCUri
+        $credential = Get-TCCredential -Credential $Credential
 
         $buildTypes += @()
     }
@@ -47,7 +47,7 @@
 
         if($Wait)
         {
-            $started | Get-BuildStatus | Out-Null
+            $started | Get-TCBuildStatus | Out-Null
         }
 
         if($IsPiped)

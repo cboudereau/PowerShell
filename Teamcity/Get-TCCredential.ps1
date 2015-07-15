@@ -1,4 +1,4 @@
-﻿function Get-TeamCityCredential()
+﻿function Get-TCCredential
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

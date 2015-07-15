@@ -1,4 +1,4 @@
-function Remove-TeamCityProject()
+function Remove-TCProject
 {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
     Param
@@ -14,8 +14,8 @@ function Remove-TeamCityProject()
         if($PSCmdlet.ShouldProcess($Id))
         {
             $project = [pscustomobject]@{ id=$Id }
-            $uri = "projects/id:$Id" | Get-TeamCityUri
-            $credential = Get-TeamCityCredential -Credential $Credential
+            $uri = "projects/id:$Id" | Get-TCUri
+            $credential = Get-TCCredential -Credential $Credential
 
             try
             {
@@ -30,7 +30,7 @@ function Remove-TeamCityProject()
     }
 }
 
-Register-ParameterCompleter -CommandName 'Remove-TeamCityProject' -ParameterName 'Id' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'Remove-TCProject' -ParameterName 'Id' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-TeamCityProject) | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name,$_.id )}
+    (Get-TCProject) | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name,$_.id )}
 }

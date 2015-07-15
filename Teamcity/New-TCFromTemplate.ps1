@@ -1,4 +1,4 @@
-function New-FromTemplate()
+function New-TCFromTemplate
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -15,10 +15,10 @@ function New-FromTemplate()
 
     Process
     {
-        $template = Get-BuildType -BuildType $TemplateId
-        $buildType = New-BuildType -ProjectId $ProjectId -Name $template.name -Credential $Credential
-        $uri = Get-TeamCityUri -RelativePath "buildTypes/id:$($buildType.id)/template"
-        $credential = Get-TeamCityCredential -Credential $Credential
+        $template = Get-TCBuildType -BuildType $TemplateId
+        $buildType = New-TCBuildType -ProjectId $ProjectId -Name $template.name -Credential $Credential
+        $uri = Get-TCUri -RelativePath "buildTypes/id:$($buildType.id)/template"
+        $credential = Get-TCCredential -Credential $Credential
 
         Post-String -Accept 'application/json' -ContentType 'text/plain' -Credential $credential -Uri $uri -Method PUT -Text $TemplateId | Out-Null
         Write-Host "$($buildType.name) was successfully created on project $ProjectId based on template $($template.id)"
@@ -26,7 +26,7 @@ function New-FromTemplate()
     }
 }
 
-Register-ParameterCompleter -CommandName 'New-FromTemplate' -ParameterName 'TemplateId' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'New-TCFromTemplate' -ParameterName 'TemplateId' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-Template) | % { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-TCTemplate) | % { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
 }

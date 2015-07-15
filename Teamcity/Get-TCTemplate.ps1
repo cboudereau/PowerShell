@@ -1,4 +1,4 @@
-﻿function Get-Template()
+﻿function Get-TCTemplate
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -14,17 +14,17 @@
     {
         if(!$ProjectId)
         {
-            return (Get-TeamCityResource -Credential $Credential -Href "buildTypes?locator=templateFlag:true").buildType
+            return (Get-TCResource -Credential $Credential -Href "buildTypes?locator=templateFlag:true").buildType
         }
         
         $uri = "projects/id:$projectId/templates"
-        $project = Get-TeamCityProject -Project $ProjectId
+        $project = Get-TCProject -Project $ProjectId
         
-        (Get-TeamCityResource -Credential $Credential -Href $uri).buildType
+        (Get-TCResource -Credential $Credential -Href $uri).buildType
 
         if($project.parentProjectId)
         {
-            Get-Template -projectId $project.parentProjectId
+            Get-TCTemplate -projectId $project.parentProjectId
         }
     }
 }

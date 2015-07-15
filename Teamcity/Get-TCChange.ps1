@@ -1,4 +1,4 @@
-﻿function Get-Change()
+﻿function Get-TCChange
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -21,15 +21,15 @@
         if($BuildType)
         {
             $parameters = @("build=$Id")
-            $changes = (Get-TeamCityResource -Credential $Credential -Href $uri -Parameters $parameters)
-            if($changes.change){ $changes.change | Get-Change }
+            $changes = (Get-TCResource -Credential $Credential -Href $uri -Parameters $parameters)
+            if($changes.change){ $changes.change | Get-TCChange }
             else { @() }
         }
 
         else
         {
             $uri += "id:$Id"
-            (Get-TeamCityResource -Credential $Credential -Href $uri -Parameters $parameters)
+            (Get-TCResource -Credential $Credential -Href $uri -Parameters $parameters)
         }
     }
 }

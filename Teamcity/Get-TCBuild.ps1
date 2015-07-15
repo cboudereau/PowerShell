@@ -1,4 +1,4 @@
-﻿function Get-Build()
+﻿function Get-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -79,6 +79,6 @@
 
         $uri = "builds/$request"
 
-        (Get-TeamCityResource -Credential $Credential -Href $uri).build
+        (Get-TCResource -Credential $Credential -Href $uri).build
     }
 }

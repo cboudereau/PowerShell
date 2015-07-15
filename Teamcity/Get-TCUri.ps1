@@ -1,4 +1,4 @@
-﻿function Get-TeamCityUri()
+﻿function Get-TCUri
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -32,7 +32,7 @@
         }
         else
         {
-            Write-Error "TeamCity Server is not set, you should use Set-TeamCityServer to set the TeamCity server address"
+            Write-Error "TeamCity Server is not set, you should use Set-TCServer to set the TeamCity server address"
         }
     }
 }

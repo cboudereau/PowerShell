@@ -1,4 +1,4 @@
-function New-TeamcityProject()
+function New-TCProject
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -18,15 +18,15 @@ function New-TeamcityProject()
         $parent = [pscustomobject]@{ id=$ParentId }
         $project = [pscustomobject]@{ name=$Name; parentProject=$parent }
 
-        $uri = "projects" | Get-TeamCityUri
-        $credential = Get-TeamCityCredential -Credential $Credential
+        $uri = "projects" | Get-TCUri
+        $credential = Get-TCCredential -Credential $Credential
 
         Post-ToJson -Uri $uri -Credential $Credential -Data $project
         Write-Host "Project $($project.name) was successfully created on project $ParentId"
     }
 }
 
-Register-ParameterCompleter -CommandName 'New-TeamcityProject' -ParameterName 'Name' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'New-TCProject' -ParameterName 'Name' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
     (Get-Solution -Name $wordToComplete) | % { $_ -replace ".sln" } | % { New-CompletionResult $_ -ToolTip ($_)}
 }

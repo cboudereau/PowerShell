@@ -1,4 +1,4 @@
-﻿function Download-AllArtifacts()
+﻿function Download-TCArtifacts()
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -20,10 +20,10 @@
     Process
     {
         $selector = "/repository/downloadAll/$BuildTypeId/$BuildId`:id/artifacts.zip"
-        $uri = $selector | Get-TeamCityUri
+        $uri = $selector | Get-TCUri
 
-        $credential = Get-TeamCityCredential
+        $credential = Get-TCCredential
 
-        Download-File -Credential $credential -Uri $uri -Folder "download/$BuildTypeId/$BuildNumber"
+        Download-TCFile -Credential $credential -Uri $uri -Folder "download/$BuildTypeId/$BuildNumber"
     }
 }

@@ -1,4 +1,4 @@
-﻿function Pin-Build()
+﻿function Pin-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -15,8 +15,8 @@
         $buildTypeId = $Build.buildTypeId
         $number = $Build.number
         
-        $uri = "builds/id:$id/pin/" | Get-TeamCityUri
-        $credential = Get-TeamCityCredential
+        $uri = "builds/id:$id/pin/" | Get-TCUri
+        $credential = Get-TCCredential
 
         $method = 'PUT'
 

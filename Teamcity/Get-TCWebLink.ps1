@@ -1,4 +1,4 @@
-﻿function Get-Badge()
+﻿function Get-TCWebLink
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -11,14 +11,14 @@
 
     Process
     {
-        $uri = Get-TeamCityUri -RelativePath "builds/buildType:(id:$Id)/statusIcon"
+        $uri = Get-TCUri -RelativePath "/viewType.html?buildTypeId=$Id"
         Write-Output $uri | clip
         Write-HostInfo "copied to clipboard!"
         Write-Host $uri
     }
 }
 
-Register-ParameterCompleter -CommandName 'Get-Badge' -ParameterName 'Id' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'Get-TCWebLink' -ParameterName 'Id' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-BuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-TCBuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
 }

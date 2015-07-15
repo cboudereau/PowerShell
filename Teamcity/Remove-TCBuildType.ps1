@@ -1,4 +1,4 @@
-function Remove-BuildType()
+function Remove-TCBuildType
 {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
     Param
@@ -14,8 +14,8 @@ function Remove-BuildType()
         if($PSCmdlet.ShouldProcess($Id))
         {
             $buildType = [pscustomobject]@{ id=$Id }
-            $uri = "buildTypes/id:$Id" | Get-TeamCityUri
-            $credential = Get-TeamCityCredential -Credential $Credential
+            $uri = "buildTypes/id:$Id" | Get-TCUri
+            $credential = Get-TCCredential -Credential $Credential
 
             try
             {
@@ -30,7 +30,7 @@ function Remove-BuildType()
     }
 }
 
-Register-ParameterCompleter -CommandName 'Remove-BuildType' -ParameterName 'Id' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'Remove-TCBuildType' -ParameterName 'Id' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-BuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-TCBuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
 }

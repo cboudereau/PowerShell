@@ -1,4 +1,4 @@
-﻿function Tag-Build()
+﻿function Tag-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -18,8 +18,8 @@
         $number = $Build.number
 
         
-        $uri = "builds/id:$id/tags/" | Get-TeamCityUri
-        $credential = Get-TeamCityCredential
+        $uri = "builds/id:$id/tags/" | Get-TCUri
+        $credential = Get-TCCredential
 
         if($Delete)
         {

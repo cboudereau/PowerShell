@@ -1,4 +1,4 @@
-function Get-BuildType()
+function Get-TCBuildType
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -28,14 +28,14 @@ function Get-BuildType()
     {
         if($buildTypes)
         {
-            return $buildTypes | ForEach-Object { Get-TeamCityResource -Credential $Credential -Href buildTypes/id:$_ }
+            return $buildTypes | ForEach-Object { Get-TCResource -Credential $Credential -Href buildTypes/id:$_ }
         }
 
-        return Get-TeamCityResource -Href buildTypes -Credential $Credential
+        return Get-TCResource -Href buildTypes -Credential $Credential
     }
 }
 
-Register-ParameterCompleter -CommandName 'Get-BuildType' -ParameterName 'BuildType' -ScriptBlock {
+Register-ParameterCompleter -CommandName 'Get-TCBuildType' -ParameterName 'BuildType' -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    (Get-BuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
+    (Get-TCBuildType).buildType | Where-Object {$_.id -like "*$wordToComplete*"} | ForEach-Object { New-CompletionResult $_.id -ToolTip ('{0} ({1})' -f $_.name, $_.id )}
 }

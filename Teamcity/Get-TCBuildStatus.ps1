@@ -1,4 +1,4 @@
-﻿function Get-BuildStatus()
+﻿function Get-TCBuildStatus
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -32,7 +32,7 @@
         while($anyRunning) 
         {
             $states = $builds | % { 
-                $queuedBuild = $_ | Get-TeamCityResource -Credential $Credential
+                $queuedBuild = $_ | Get-TCResource -Credential $Credential
                 $state = $queuedBuild.state
                 $isFinished = $queuedBuild.state -eq 'finished'
                 $percentComplete = if($isFinished){ 100 } elseif($queuedBuild.percentageComplete){ $queuedBuild.percentageComplete } else { 0 }
@@ -48,7 +48,7 @@
             if(!$anyRunning)
             {
                 $states | % { 
-                    $changeTexts = $_.build | Get-Change | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
+                    $changeTexts = $_.build | Get-TCChange | % { "change by $($_.username) [$($_.version)] : $($_.comment)" }
                     $changes = $changeTexts -join "`r`n"
                     
                     Write-Host "Build $($_.build.buildTypeId) is $($_.state) with status : $($_.build.status)($($_.statusText))`r`n$($changes)" }

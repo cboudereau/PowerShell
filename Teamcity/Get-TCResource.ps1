@@ -1,4 +1,4 @@
-function Get-TeamCityResource()
+function Get-TCResource
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -13,8 +13,8 @@ function Get-TeamCityResource()
 
     Process
     {
-        $credential = Get-TeamCityCredential $Credential
-        $uri = Get-TeamCityUri -RelativePath $Href -Parameters $Parameters
+        $credential = Get-TCCredential $Credential
+        $uri = Get-TCUri -RelativePath $Href -Parameters $Parameters
 
         return Get-FromJson -Credential $credential -Uri $uri
     }

@@ -1,4 +1,4 @@
-function New-BuildType()
+function New-TCBuildType
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -17,8 +17,8 @@ function New-BuildType()
     {
         $buildType = [pscustomobject]@{ name=$Name; projectId=$ProjectId }
 
-        $uri = "buildTypes" | Get-TeamCityUri
-        $credential = Get-TeamCityCredential -Credential $Credential
+        $uri = "buildTypes" | Get-TCUri
+        $credential = Get-TCCredential -Credential $Credential
 
         Post-ToJson -Uri $uri -Credential $Credential -Data $buildType
     }

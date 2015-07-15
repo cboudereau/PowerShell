@@ -1,4 +1,4 @@
-﻿function Set-TeamCityServer()
+﻿function Set-TCServer
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
