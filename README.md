@@ -190,6 +190,11 @@ Url is copied to clipboard
 
 ### Download-TCArtifacts
 Download artifacts.zip of a build
+Parameter Directory (target folder) can be specified. If Not, the directory download is created.
+The artifact in downloaded under Directory/BuildType/BuildNumber folder
+```powershell
+   Get-TCBuildType Net_Framework | Get-TCBuild -Last -Status SUCCESS | Download-TCArtifacts
+```
 
 ### Pipelining
   Thanks to PowerShell Pipeline, you can combine commands even if the output return a list. In this case an implicit foreach occurs on the next command. For example if the command Get-TCBuildTypes return 3 buildTypes then if you pipe to Start-TCBuild, the 3 buildType starts
