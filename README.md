@@ -153,6 +153,9 @@ Tag a given build
 
 ### Get-TCChange
 ```powershell
+   #Get Only one change
+   Get-TCChange 25
+   
    #Start all builds and wait the result in a progressbar :)
    Get-TCBuildType | Get-TCBuild -Last | Get-TCChange
 ```
