@@ -1,3 +1,16 @@
+<#
+    .SYNOPSIS
+    Create a new build type (build configuration) under a given project. _Root project correspond to the Root TeamCity project
+
+    .DESCRIPTION
+    Create a new build configuration with the given name under the pipelined project.
+
+    .PARAMETER ProjectId
+    Mandatory, aliased Id is the project where is hosted the build configurations
+
+    .EXAMPLE
+    C:\PS> Get-TCProject Net | New-TCBuildType -Name Framework
+#>
 function New-TCBuildType
 {
     [CmdletBinding(SupportsShouldProcess)]
