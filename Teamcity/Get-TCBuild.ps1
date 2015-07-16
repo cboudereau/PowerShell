@@ -36,7 +36,7 @@
        Given a looup limit, return build corresponding to the given build type limited to the lookup limit count.
 
        .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCBadge
+       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild
     #>
     
     [CmdletBinding(SupportsShouldProcess)]
