@@ -9,7 +9,7 @@
     The Id property of the build type object from the pipeline
 
     .EXAMPLE
-    C:\PS> Remove-TCBuildType Net_FSharp.Temporality_Build
+    C:\PS> Remove-TCBuildType Net_FSharpTemporality_Build
 #>
 function Remove-TCBuildType
 {

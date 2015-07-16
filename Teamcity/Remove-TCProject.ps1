@@ -1,3 +1,16 @@
+<#
+    .SYNOPSIS
+    Remove a project.
+
+    .DESCRIPTION
+    Remove a project. CmdLet use tab expansion in order to retrieve all projects from teamcity server
+
+    .PARAMETER Id
+    The Id property of the project object from the pipeline
+
+    .EXAMPLE
+    C:\PS> Remove-TCProject Net_FSharpTemporality
+#>
 function Remove-TCProject
 {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
