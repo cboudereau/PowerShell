@@ -22,12 +22,7 @@
        Is the BuildNumber (also aliased number) of the Build object into the pipeline (Value by property name)
 
        .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCbuild
-
-       Get Only one change
-
-       .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild -Last -Status SUCCESS | Download-TCArtifacts
+       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild SUCCESS -Last | Download-TCArtifacts
        
        Download artifacts from the last succesful build Net_Framework
 

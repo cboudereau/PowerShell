@@ -1,5 +1,23 @@
 ﻿function Download-TCFile
 {
+            <#
+       .SYNOPSIS
+        Download artifact file for a given artifact path.
+
+       .DESCRIPTION
+        When a build is finished, it produce artifact files.
+        Given a finished build, then this cmdlet download the artifact file at given uri.
+
+       .PARAMETER Folder
+       The target download foldr
+
+       .PARAMETER Uri
+       The artifact file uri
+
+       .EXAMPLE
+       C:\PS> Download-TCFile http://localhost:7777/repository/download/Net_Framework/479:id/Castle.Core.dll
+    #>
+    
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
