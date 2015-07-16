@@ -1,4 +1,17 @@
-﻿function Get-TCTemplate
+﻿<#
+    .SYNOPSIS
+    Get Teamcity template for a given project
+
+    .DESCRIPTION
+    Return template object from teamcity project.
+
+    .PARAMETER Id
+    Mandatory, Correspond to a project. This cmdlet is used to autocomplete the New-TCFromTemplate parameter
+
+    .EXAMPLE
+    C:\PS> Get-TCTemplate Net
+#>
+function Get-TCTemplate
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
