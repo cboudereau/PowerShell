@@ -5,7 +5,7 @@
         Download the zip artifacts.
 
        .DESCRIPTION
-        When a build is finished, it produce artifact that can be zip.
+        When a build is finished, it produce artifact that can be zipped by TeamCity.
         Given a finished build, then this cmdlet download the artifacts as zip.
 
        .PARAMETER Directory
