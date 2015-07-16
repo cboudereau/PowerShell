@@ -1,3 +1,16 @@
+<#
+    .SYNOPSIS
+    Create a new build type (build configuration) based on a given teamcity template.
+
+    .DESCRIPTION
+    Given a parent project and a template then create a build type (build configuration) same called as template under parent project
+
+    .PARAMETER ProjectId
+    Mandatory, aliased Id is the project where is hosted the build configurations
+
+    .EXAMPLE
+    C:\PS> Get-TCProject Net | New-TCProject Fsharp.Temporality | New-TCFromTemplate Net_Build
+#>
 function New-TCFromTemplate
 {
     [CmdletBinding(SupportsShouldProcess)]
