@@ -1,12 +1,28 @@
-﻿function Pin-TCBuild
+﻿<#
+    .SYNOPSIS
+    Pin a given build.
+
+    .DESCRIPTION
+    When a TeamCity build is pinned, this build is never removed. Instead, TeamCity display the amount of used data for pinned build in the data usage configurations
+
+    .PARAMETER Build
+    The build from the pipeline see example
+
+    .PARAMETER Delete
+    Switch, when it is set, remove the pin build.
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_FSharp.Temporality_Build | Get-TCBuild SUCCESFUL -Last | Pin-Build
+#>
+function Pin-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
-        [switch] $Delete,
-
         [Parameter(Mandatory, ValueFromPipeline)]
-        $Build
+        $Build,
+
+        [switch] $Delete
     )
 
     Process
