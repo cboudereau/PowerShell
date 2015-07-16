@@ -1,6 +1,6 @@
 ﻿function Download-TCArtifacts
 {
-        <#
+    <#
        .SYNOPSIS
         Download the zip artifacts.
 

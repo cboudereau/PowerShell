@@ -1,5 +1,20 @@
 ﻿function Get-TCBadge
 {
+    <#
+       .SYNOPSIS
+        Copy to clipboard the TeamCity build badge
+
+       .DESCRIPTION
+        When a build is finished, TeamCity display a state SUCCESS, FAILURE or UNKNOWN when cancelled.
+        This cmdlet display the build state for the last build for a given buildType
+
+       .PARAMETER Id
+       Mandatory, Given a buildType (also called build configuration). This parameter is the build type id (Value by property name).
+
+       .EXAMPLE
+       C:\PS> Get-TCBuildType Net_Framework | Get-TCBadge
+    #>
+    
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (

@@ -1,6 +1,6 @@
 ﻿function Download-TCFile
 {
-            <#
+    <#
        .SYNOPSIS
         Download artifact file for a given artifact path.
 
@@ -9,7 +9,7 @@
         Given a finished build, then this cmdlet download the artifact file at given uri.
 
        .PARAMETER Folder
-       The target download foldr
+       The target download folder
 
        .PARAMETER Uri
        The artifact file uri
