@@ -1,24 +1,23 @@
+<#
+    .SYNOPSIS
+    Get the build type TeamCity object
+
+    .DESCRIPTION
+    Build Type also called Build Configuration in TemaCity web interface can be retrieved thanks to autocompletion feature. Juste type the Get-TCBuildType then space and tab to autocomplete the build configuration with TeamCity server build configuration
+
+    .PARAMETER BuildType
+    Mandatory, also called buildTypes or id
+    When it is called to the pipeline with Get-TCProject, it will return all build type for a given project.
+    WHen it is called independently, the autocompletion feature give the build type to get.
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework
+
+    .EXAMPLE
+    C:\PS> Get-TCProject Net | Get-TCBuildType
+#>
 function Get-TCBuildType
 {
-    <#
-       .SYNOPSIS
-        Get the build type TeamCity object
-
-       .DESCRIPTION
-        Build Type also called Build Configuration in TemaCity web interface can be retrieved thanks to autocompletion feature. Juste type the Get-TCBuildType then space and tab to autocomplete the build configuration with TeamCity server build configuration
-
-       .PARAMETER BuildType
-       Mandatory, also called buildTypes or id
-       When it is called to the pipeline with Get-TCProject, it will return all build type for a given project.
-       WHen it is called independently, the autocompletion feature give the build type to get.
-
-       .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework
-
-       .EXAMPLE
-       C:\PS> Get-TCProject Net | Get-TCBuildType
-    #>
-
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (

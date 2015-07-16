@@ -1,4 +1,17 @@
-﻿function Get-TCWebLink
+﻿<#
+    .SYNOPSIS
+    Get the build type web url
+
+    .DESCRIPTION
+    Copy to clipboard the teamcity build type or configuration web url.
+
+    .PARAMETER Id
+    Mandatory, Correspond to a build configuration and autocompleted by retrieving teamcity build configuration from server.s
+
+    .EXAMPLE
+    C:\PS> Get-TCWebLink FSharp.Data
+#>
+function Get-TCWebLink
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param

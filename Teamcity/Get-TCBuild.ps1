@@ -1,44 +1,43 @@
-﻿function Get-TCBuild
+﻿<#
+    .SYNOPSIS
+    Get the build for a given build type
+
+    .DESCRIPTION
+    Get the build object when a buildtype is given into the pipeline or when the id is set to a corresponding buildtype.
+    This parameter is autocompleted by fetching buildtype on TeamCity server.
+
+    .PARAMETER Id
+    Mandatory, Given a buildType (also called build configuration). This parameter is the build type id (Value by property name).
+
+    .PARAMETER Status
+    Can be ALL, SUCCESS or FAILURE. When this parameter is set the cmdlet return all build type with the given status
+
+    .PARAMETER Tags
+    Contains list of tag. When this parameter is set, return the build corresponding to the given tags
+
+    .PARAMETER Pinned
+    Switch parameter, when this switch is set, the cmdlet return the pin builds
+
+    .PARAMETER SinceLastSuccessful
+    Can be used to see new problems. When there is new build failure when environment contain any failed builds.
+
+    .PARAMETER Running
+    Switch parameter; when it is set, return running builds for a given buildtype.
+
+    .PARAMETER Canceled
+    Switch parameter; when it is set, return canceled builds for a gieven buildtype.
+
+    .PARAMETER Last
+    Switch, when it set, return the last build. This functionnality use the TeamCity LookupLimit to 1
+
+    .PARAMETER LookupLimit
+    Given a looup limit, return build corresponding to the given build type limited to the lookup limit count.
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild
+#>
+function Get-TCBuild
 {
-    <#
-       .SYNOPSIS
-       Get the build for a given build type
-
-       .DESCRIPTION
-       Get the build object when a buildtype is given into the pipeline or when the id is set to a corresponding buildtype.
-       This parameter is autocompleted by fetching buildtype on TeamCity server.
-
-       .PARAMETER Id
-       Mandatory, Given a buildType (also called build configuration). This parameter is the build type id (Value by property name).
-
-       .PARAMETER Status
-       Can be ALL, SUCCESS or FAILURE. When this parameter is set the cmdlet return all build type with the given status
-
-       .PARAMETER Tags
-       Contains list of tag. When this parameter is set, return the build corresponding to the given tags
-
-       .PARAMETER Pinned
-       Switch parameter, when this switch is set, the cmdlet return the pin builds
-
-       .PARAMETER SinceLastSuccessful
-       Can be used to see new problems. When there is new build failure when environment contain any failed builds.
-
-       .PARAMETER Running
-       Switch parameter; when it is set, return running builds for a given buildtype.
-
-       .PARAMETER Canceled
-       Switch parameter; when it is set, return canceled builds for a gieven buildtype.
-
-       .PARAMETER Last
-       Switch, when it set, return the last build. This functionnality use the TeamCity LookupLimit to 1
-
-       .PARAMETER LookupLimit
-       Given a looup limit, return build corresponding to the given build type limited to the lookup limit count.
-
-       .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild
-    #>
-    
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (

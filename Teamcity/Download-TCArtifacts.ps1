@@ -1,33 +1,32 @@
-﻿function Download-TCArtifacts
-{
-    <#
-       .SYNOPSIS
-        Download the zip artifacts.
+﻿<#
+    .SYNOPSIS
+    Download the zip artifacts.
 
-       .DESCRIPTION
-        When a build is finished, it produce artifact that can be zipped by TeamCity.
-        Given a finished build, then this cmdlet download the artifacts as zip.
+    .DESCRIPTION
+    When a build is finished, it produce artifact that can be zipped by TeamCity.
+    Given a finished build, then this cmdlet download the artifacts as zip.
 
-       .PARAMETER Directory
-       This parameter is set to download. This directory is created if doesn't exist.
-       The Directory folder is classed by /Directory/BuildTypeId/BuildNumber
+    .PARAMETER Directory
+    This parameter is set to download. This directory is created if doesn't exist.
+    The Directory folder is classed by /Directory/BuildTypeId/BuildNumber
 
-       .PARAMETER BuildId
-       Is the BuildId of the Build object into the pipeline (Value by property name)
+    .PARAMETER BuildId
+    Is the BuildId of the Build object into the pipeline (Value by property name)
 
-       .PARAMETER BuildTypeId
-       Is the BuildTypeId of the Build object into the pipeline (Value by property name)
+    .PARAMETER BuildTypeId
+    Is the BuildTypeId of the Build object into the pipeline (Value by property name)
 
-       .PARAMETER BuildNumber
-       Is the BuildNumber (also aliased number) of the Build object into the pipeline (Value by property name)
+    .PARAMETER BuildNumber
+    Is the BuildNumber (also aliased number) of the Build object into the pipeline (Value by property name)
 
-       .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild SUCCESS -Last | Download-TCArtifacts
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild SUCCESS -Last | Download-TCArtifacts
        
-       Download artifacts from the last succesful build Net_Framework
+    Download artifacts from the last succesful build Net_Framework
 
-    #>
-    
+#>
+function Download-TCArtifacts
+{
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (

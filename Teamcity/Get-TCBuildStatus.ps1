@@ -1,19 +1,18 @@
-﻿function Get-TCBuildStatus
+﻿<#
+    .SYNOPSIS
+    Get the build status object for a given build
+
+    .DESCRIPTION
+    When a build is finished or running (any status in fact), this cmdlet return the TeamCity build state object
+
+    .PARAMETER Build
+    Mandatory, also called href, in the TeamCity semantic. The href property correspond to the build href property.
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild -Last | Get-TCBuildStatus
+#>
+function Get-TCBuildStatus
 {
-    <#
-       .SYNOPSIS
-        Get the build status object for a given build
-
-       .DESCRIPTION
-        When a build is finished or running (any status in fact), this cmdlet return the TeamCity build state object
-
-       .PARAMETER Build
-       Mandatory, also called href, in the TeamCity semantic. The href property correspond to the build href property.
-
-       .EXAMPLE
-       C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild -Last | Get-TCBuildStatus
-    #>
-    
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
