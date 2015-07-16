@@ -1,3 +1,16 @@
+<#
+    .SYNOPSIS
+    Remove a build configuration.
+
+    .DESCRIPTION
+    Remove a build configuration. CmdLet use tab expansion in order to retrieve all build configuration from teamcity server
+
+    .PARAMETER Id
+    The Id property of the build type object from the pipeline
+
+    .EXAMPLE
+    C:\PS> Remove-TCBuildType Net_FSharp.Temporality_Build
+#>
 function Remove-TCBuildType
 {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
