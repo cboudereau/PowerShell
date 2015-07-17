@@ -19,17 +19,17 @@ In profile.ps1 write :
 Folder structure : 
 %USERPROFILE%\Documents\WindowsPowerShell
 
-|_ Modules
+	|_ Modules
 
-	|_ PSCompletion
+		|_ PSCompletion
 
-		|_ ...
+			|_ ...
 
-	|_ Teamcity
+		|_ Teamcity
 
-		|_ ...
+			|_ ...
 
-|_ profile.ps1
+	|_ profile.ps1
 		
 
 ## PsCompletion Module (autocomplete argument thanks to @thinkbeforecoding)
