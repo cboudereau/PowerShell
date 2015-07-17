@@ -18,11 +18,17 @@ In profile.ps1 write :
 
 Folder structure : 
 %USERPROFILE%\Documents\WindowsPowerShell
+
 |_ Modules
+
 	|_ PSCompletion
+
 		|_ ...
+
 	|_ Teamcity
+
 		|_ ...
+
 |_ profile.ps1
 		
 
