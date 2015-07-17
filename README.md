@@ -2,9 +2,13 @@
 
 ## How to Install Modules
 Clone the repo and copy modules to the powershell module path.
+
 To find powershell module path, in a powershell console enter $env:PSModulePath
+
 This env variable contains all module reference path used to find module
+
 To avoid import module repetition, use the profile.ps1 in the %USERPROFILE%\Documents\WindowsPowerShell\profile.ps1
+
 In profile.ps1 write : 
 
 ```powsershell
