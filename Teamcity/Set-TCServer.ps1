@@ -1,4 +1,17 @@
-﻿function Set-TCServer
+﻿<#
+    .SYNOPSIS
+    Set the teamcity server root uri.
+
+    .DESCRIPTION
+    In order to avoid repeition on argument, this cmdlet set the teamcity server into a env variable called TEAMCITY
+
+    .PARAMETER Uri
+    The base Uri
+
+    .EXAMPLE
+    C:\PS> Set-TCServer http://localhost:7777/
+#>
+function Set-TCServer
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
