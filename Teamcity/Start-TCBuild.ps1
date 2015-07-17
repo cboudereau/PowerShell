@@ -1,4 +1,24 @@
-﻿function Start-TCBuild
+﻿<#
+    .SYNOPSIS
+    Start a build from a build type.
+
+    .DESCRIPTION
+    Run build from a given build type (build configuration) from the pipeline
+
+    .PARAMETER BuildType
+    Mandatory, Also called buildTypeId or id.
+
+    .PARAMETER Wait
+    Switch parameter. When it is set, the cmdlet wait the end of the build (build finished). When build is running a progress bar display the TeamCity progress of build.
+    The build status is displayed thanks to Get-TCBuildStatus cmdlet.
+
+    .PARAMETER OutBuild
+    By default, the start build cmdlet did not return any teamcity build object. This is may be the end of the pipeline. If not, this parameter can be set in order to pipe the output with another cmdlet.
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework | Start-TCBuild
+#>
+function Start-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
@@ -9,9 +29,7 @@
         
         [switch] $Wait,
         
-        [switch] $Top,
-
-        [switch] $ShowBuild,
+        [switch] $OutBuild,
 
         [pscredential] $Credential
     )
@@ -41,7 +59,7 @@
         }
         
         $started = $uniqueBuildTypes | % { 
-            $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_; moveToTop=$Top }
+            $data = New-Object -TypeName psobject -Property @{ buildTypeId = $_ }
             Post-ToJson -Credential $credential -Data $data -Uri $uri -ErrorAction Stop
             Write-Host "$_ was successfully added to the queue" }
 
@@ -50,7 +68,7 @@
             $started | Get-TCBuildStatus | Out-Null
         }
 
-        if($IsPiped)
+        if($OutBuild)
         {
             return $started
         }

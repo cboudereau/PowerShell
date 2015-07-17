@@ -1,14 +1,33 @@
-﻿function Tag-TCBuild
+﻿<#
+    .SYNOPSIS
+    Tag a build.
+
+    .DESCRIPTION
+    Tag the build with the given Tag parameter
+
+    .PARAMETER Build
+    Mandatory, Build object in order to combine cmdlet with Pin-Build for example.
+
+    .PARAMETER Tag
+    The tag value
+
+    .PARAMETER Delete
+    Switch parameter. When delete is given all tag are removed from the given build
+
+    .EXAMPLE
+    C:\PS> Get-TCBuildType Net_Framework | Get-TCBuild SUCCESS -Last | Tag-TCBuild -Tag RC
+#>
+function Tag-TCBuild
 {
     [CmdletBinding(SupportsShouldProcess)]
     Param
     (
+        [Parameter(Mandatory, ValueFromPipeline)]
+        $Build,
+
         [string] $Tag,
         
-        [switch] $Delete,
-
-        [Parameter(Mandatory, ValueFromPipeline)]
-        $Build
+        [switch] $Delete
     )
 
     Process
