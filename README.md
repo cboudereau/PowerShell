@@ -25,7 +25,10 @@ Folder structure :
 		|_ Teamcity
 			|_ ...
 	|_ profile.ps1
-		
+
+Get help from a command line
+
+Get-Help Get-TCBuildType	
 
 ## PsCompletion Module (autocomplete argument thanks to @thinkbeforecoding)
 
