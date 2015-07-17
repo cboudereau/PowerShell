@@ -1,5 +1,27 @@
 # PowerShell
 
+## How to Install Modules
+Clone the repo and copy modules to the powershell module path.
+To find powershell module path, in a powershell console enter $env:PSModulePath
+This env variable contains all module reference path used to find module
+To avoid import module repetition, use the profile.ps1 in the %USERPROFILE%\Documents\WindowsPowerShell\profile.ps1
+In profile.ps1 write : 
+
+```powsershell
+	Import-Module PSCompletion
+	Import-Module Teamcity
+```
+
+Folder structure : 
+%USERPROFILE%\Documents\WindowsPowerShell
+|_ Modules
+	|_ PSCompletion
+		|_ ...
+	|_ Teamcity
+		|_ ...
+|_ profile.ps1
+		
+
 ## PsCompletion Module (autocomplete argument thanks to @thinkbeforecoding)
 
 Teamcity module: Get build type, builds, Start and pin build and more
