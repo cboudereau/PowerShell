@@ -26,10 +26,8 @@ Folder structure :
 			|_ ...
 	|_ profile.ps1
 
-Get help from a command line
-
-Get-Help Get-TCBuildType	
-
+All cmdlet are documented thanks to the powershell help feature
+	
 ## PsCompletion Module (autocomplete argument thanks to @thinkbeforecoding)
 
 Teamcity module: Get build type, builds, Start and pin build and more
