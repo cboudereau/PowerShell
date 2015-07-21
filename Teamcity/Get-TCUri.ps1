@@ -6,7 +6,9 @@
         [Parameter(ValueFromPipeline)]
         [string] $RelativePath = "",
 
-        [string[]] $Parameters = @()
+        [string[]] $Parameters = @(),
+
+        [string] $Server
     )
 
     
@@ -21,18 +23,15 @@
             $query = $query.Substring(0, $query.Length -1)
         }
         
-        if($env:TEAMCITY)
-        {
-            $path = [System.IO.Path]::Combine("httpAuth/app/rest/", $RelativePath)
-            $root = New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY)
+        $root = 
+            if($Server) { New-Object -TypeName System.Uri -ArgumentList @($Server) }
+            elseif ($env:TEAMCITY) {New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY) }
+            else { Write-Error "TeamCity Server is not set, you should use Set-TCServer to set the TeamCity server address" }
 
-            $uri = New-Object -TypeName System.Uri -ArgumentList @($root, "$path$query")
+        $path = [System.IO.Path]::Combine("httpAuth/app/rest/", $RelativePath)
+
+        $uri = New-Object -TypeName System.Uri -ArgumentList @($root, "$path$query")
                         
-            return $uri.AbsoluteUri
-        }
-        else
-        {
-            Write-Error "TeamCity Server is not set, you should use Set-TCServer to set the TeamCity server address"
-        }
+        return $uri.AbsoluteUri
     }
 }
