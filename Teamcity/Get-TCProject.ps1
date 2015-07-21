@@ -9,6 +9,9 @@
     .PARAMETER Project
     Mandatory, Also called Id, This parameter is autocomplete.
 
+    .PARAMETER Server
+    Set the teamcity server
+
     .EXAMPLE
     C:\PS> Get-TCProject Net
 
@@ -24,17 +27,19 @@ function Get-TCProject
         [Alias('id')]
         [string] $Project,
         
-        [pscredential] $Credential
+        [pscredential] $Credential,
+
+        [string] $Server
     )
 
     Process
     {
         if($Project)
         {
-            return Get-TCResource -Credential $Credential -Href projects/id:$Project
+            return Get-TCResource -Credential $Credential -Href projects/id:$Project -Server $Server
         }
         
-        return (Get-TCResource -Credential $Credential -Href projects).project
+        return (Get-TCResource -Credential $Credential -Href projects -Server $Server).project
     }
 }
 

@@ -8,13 +8,15 @@ function Get-TCResource
         
         [string[]] $Parameters,
 
-        [pscredential] $Credential
+        [pscredential] $Credential,
+
+        [string] $Server
     )
 
     Process
     {
         $credential = Get-TCCredential $Credential
-        $uri = Get-TCUri -RelativePath $Href -Parameters $Parameters
+        $uri = Get-TCUri -RelativePath $Href -Parameters $Parameters -Server $Server
 
         return Get-FromJson -Credential $credential -Uri $uri
     }

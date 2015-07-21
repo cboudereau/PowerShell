@@ -25,8 +25,11 @@
         
         $root = 
             if($Server) { New-Object -TypeName System.Uri -ArgumentList @($Server) }
-            elseif ($env:TEAMCITY) {New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY) }
-            else { Write-Error "TeamCity Server is not set, you should use Set-TCServer to set the TeamCity server address" }
+            elseif ($env:TEAMCITY) { New-Object -TypeName System.Uri -ArgumentList @($env:TEAMCITY) }
+            else { 
+                $server = Read-Host "supply teamcity server like http://localhost:7777/"
+                Set-TCServer $server
+                New-Object -TypeName System.Uri -ArgumentList @($server) }
 
         $path = [System.IO.Path]::Combine("httpAuth/app/rest/", $RelativePath)
 

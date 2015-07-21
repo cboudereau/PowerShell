@@ -22,7 +22,7 @@
         }
         else
         {
-            $global:TEAMCITY_REST = Get-Credential
+            $global:TEAMCITY_REST = Get-Credential -Message "Credential for teamcity rest user"
             return $global:TEAMCITY_REST
         }
     }

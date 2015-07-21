@@ -3,7 +3,7 @@
     Set the teamcity server root uri.
 
     .DESCRIPTION
-    In order to avoid repeition on argument, this cmdlet set the teamcity server into a env variable called TEAMCITY
+    In order to avoid repetition on argument, this cmdlet set the teamcity server into a env variable called TEAMCITY
 
     .PARAMETER Uri
     The base Uri
@@ -24,6 +24,8 @@ function Set-TCServer
     {
         $env:TEAMCITY = $Uri
 
-        Write-Host "Server is : $Uri" 
+        Write-Host "Server is : $Uri"
+
+        $Uri
     }
 }
